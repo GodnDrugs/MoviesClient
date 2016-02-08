@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MCSearchViewController" customModule="MoviesClient" customModuleProvider="target">
+            <connections>
+                <outlet property="searchBar" destination="IXy-Gh-2Z4" id="APW-wF-JxQ"/>
+                <outlet property="tableView" destination="3C7-R5-mW3" id="u74-Gn-k6e"/>
+                <outlet property="view" destination="i9y-ke-Mss" id="oJS-rq-VUx"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="i9y-ke-Mss">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="IXy-Gh-2Z4">
+                    <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3C7-R5-mW3">
+                    <rect key="frame" x="0.0" y="108" width="320" height="372"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="IXy-Gh-2Z4" firstAttribute="leading" secondItem="i9y-ke-Mss" secondAttribute="leading" id="DI5-bo-0os"/>
+                <constraint firstItem="3C7-R5-mW3" firstAttribute="top" secondItem="IXy-Gh-2Z4" secondAttribute="bottom" id="OdR-t6-dc7"/>
+                <constraint firstItem="IXy-Gh-2Z4" firstAttribute="top" secondItem="i9y-ke-Mss" secondAttribute="top" constant="64" id="Ojd-aj-eRv"/>
+                <constraint firstItem="3C7-R5-mW3" firstAttribute="leading" secondItem="i9y-ke-Mss" secondAttribute="leading" id="RkL-bi-ODB"/>
+                <constraint firstAttribute="bottom" secondItem="3C7-R5-mW3" secondAttribute="bottom" id="W88-Ac-NYz"/>
+                <constraint firstAttribute="trailing" secondItem="3C7-R5-mW3" secondAttribute="trailing" id="hpt-ba-0BZ"/>
+                <constraint firstAttribute="trailing" secondItem="IXy-Gh-2Z4" secondAttribute="trailing" id="v7v-Ta-Rj0"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="308" y="-409"/>
+        </view>
+    </objects>
+</document>
