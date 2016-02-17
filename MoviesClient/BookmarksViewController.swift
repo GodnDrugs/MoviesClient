@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MCBookmarksViewController: UIViewController {
+class BookmarksViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

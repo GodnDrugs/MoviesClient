@@ -1,14 +1,20 @@
 //
-//  MCSplashScreenViewController.swift
+//  SplashScreenViewController.swift
 //  MoviesClient
 //
-//  Created by Sergey Salnikov on 07.02.16.
+//  Created by Sergey Salnikov on 08.02.16.
 //  Copyright © 2016 Sergey Salnikov. All rights reserved.
 //
 
 import UIKit
 
-class MCSplashScreenViewController: UIViewController {
+protocol SplashScreenViewControllerDelegate {
+    func splashScreenViewControllerWasFinishedLoading()
+}
+
+class SplashScreenViewController: UIViewController {
+    
+    var delegate:SplashScreenViewController? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()

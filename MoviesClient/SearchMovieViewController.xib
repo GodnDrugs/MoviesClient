@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MCSearchViewController" customModule="MoviesClient" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchMovieViewController" customModule="MoviesClient" customModuleProvider="target">
             <connections>
                 <outlet property="searchBar" destination="IXy-Gh-2Z4" id="APW-wF-JxQ"/>
                 <outlet property="tableView" destination="3C7-R5-mW3" id="u74-Gn-k6e"/>
@@ -21,22 +21,22 @@
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3C7-R5-mW3">
-                    <rect key="frame" x="0.0" y="108" width="320" height="372"/>
+                    <rect key="frame" x="0.0" y="108" width="320" height="323"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="IXy-Gh-2Z4" firstAttribute="leading" secondItem="i9y-ke-Mss" secondAttribute="leading" id="DI5-bo-0os"/>
-                <constraint firstItem="3C7-R5-mW3" firstAttribute="top" secondItem="IXy-Gh-2Z4" secondAttribute="bottom" id="OdR-t6-dc7"/>
+                <constraint firstItem="3C7-R5-mW3" firstAttribute="leading" secondItem="i9y-ke-Mss" secondAttribute="leading" id="OB3-6d-liL"/>
                 <constraint firstItem="IXy-Gh-2Z4" firstAttribute="top" secondItem="i9y-ke-Mss" secondAttribute="top" constant="64" id="Ojd-aj-eRv"/>
-                <constraint firstItem="3C7-R5-mW3" firstAttribute="leading" secondItem="i9y-ke-Mss" secondAttribute="leading" id="RkL-bi-ODB"/>
-                <constraint firstAttribute="bottom" secondItem="3C7-R5-mW3" secondAttribute="bottom" id="W88-Ac-NYz"/>
-                <constraint firstAttribute="trailing" secondItem="3C7-R5-mW3" secondAttribute="trailing" id="hpt-ba-0BZ"/>
+                <constraint firstItem="3C7-R5-mW3" firstAttribute="top" secondItem="IXy-Gh-2Z4" secondAttribute="bottom" id="kZG-an-zTe"/>
+                <constraint firstAttribute="trailing" secondItem="3C7-R5-mW3" secondAttribute="trailing" id="pvr-oE-26Y"/>
                 <constraint firstAttribute="trailing" secondItem="IXy-Gh-2Z4" secondAttribute="trailing" id="v7v-Ta-Rj0"/>
+                <constraint firstAttribute="bottom" secondItem="3C7-R5-mW3" secondAttribute="bottom" constant="49" id="vUP-vU-oaZ"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="308" y="-409"/>
+            <point key="canvasLocation" x="321" y="-652"/>
         </view>
     </objects>
 </document>
