@@ -30,44 +30,35 @@ class MovieFactory: NSObject {
         
         return Static.instance!
     }
-    
-    func alertError(error textError: String)
-    {
-        let alertController = UIAlertController(title: "Ошибка ввода!", message: textError, preferredStyle: .Alert)
-        let actionOk = UIAlertAction(title: "Повторить ввод", style: .Default) { (action) in }
-        alertController.addAction(actionOk)
-        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alertController, animated: true) {}
-    }
 
     func collectorIdFoundMovieBySearch(searchString text: String, completion: [FoundMovie] -> Void) -> Void
     {
         var imdbIDArray = Array<String>()
         var foundMovieArray = Array<FoundMovie>()
         let downloadGroup = dispatch_group_create()
-        let url = "http://www.omdbapi.com/?s="+text
-        Alamofire.request(.GET, url, parameters: ["foo": "bar"])
+        
+        let urlForSearchByTitle = self.createUrlForSearchByTitle(movieTitle: text)
+        Alamofire.request(.GET, urlForSearchByTitle, parameters: ["foo": "bar"])
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
                     
-                    print("\(JSON)")
                     let dictionaryJSON = JSON as! NSDictionary
                     let response = dictionaryJSON.valueForKeyPath("Response") as! String
                     
                     if (response == "False") {
-                        
-//                        let errorMessage = dictionaryJSON.valueForKeyPath("Error") as! String
                         self.delegate?.showSearchError(movieTitle: text)
-                        
                         return
                     }
                     
                     imdbIDArray = dictionaryJSON.valueForKeyPath("Search.imdbID") as! Array<String>
                 }
+                
                 for id in imdbIDArray {
                     
                     dispatch_group_enter(downloadGroup)
-                    Alamofire.request(.GET, "http://www.omdbapi.com/?i="+id+"&plot=full&r=json", parameters: ["foo": "bar"])
+                    let urlSearchByID = self.createUrlForSearchByID(insertID: id)
+                    Alamofire.request(.GET, urlSearchByID, parameters: ["foo": "bar"])
                         .responseJSON { response in
                             
                             if let JSON = response.result.value {
@@ -88,5 +79,22 @@ class MovieFactory: NSObject {
         }//End Alamofire
 
     }//End Function
+    
+    func createUrlForSearchByID(insertID id: String) -> String
+    {
+        let URLPartOne = "http://www.omdbapi.com/?i="
+        let URLPartTwo = "&plot=full&r=json"
+        let resultURL = URLPartOne+id+URLPartTwo
+        
+        return resultURL
+    }
+    
+    func createUrlForSearchByTitle(movieTitle title: String) -> String
+    {
+        let baseURL = "http://www.omdbapi.com/?s="
+        let resultURL = baseURL+title
+        
+        return resultURL
+    }
     
 }//End Class
