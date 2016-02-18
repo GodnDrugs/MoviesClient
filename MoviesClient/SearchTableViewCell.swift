@@ -15,11 +15,15 @@ class SearchTableViewCell: UITableViewCell {
     @IBOutlet weak var movieDescriptionLabel: UILabel!
     @IBOutlet weak var imageMovie: UIImageView!
     @IBOutlet weak var cardView: UIView!
+    @IBOutlet weak var addToBookmarksButtonProperty: UIButton!
+    
+
     
     override func awakeFromNib()
     {
         super.awakeFromNib()
         
+        self.addToBookmarksButtonProperty.setTitle("Добавить в закладки", forState: UIControlState.Normal)
         self.cardView.layer.borderWidth = 1.0
         self.cardView.layer.borderColor = UIColor.grayColor().CGColor
         
@@ -30,6 +34,25 @@ class SearchTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+
+    
+    class func nibSearchCell() -> UINib
+    {
+        let nib = UINib(nibName: "SearchTableViewCell", bundle: nil)
+        
+        return nib
+    }
+    
+    class func cellSearchReuseIdentifier() -> String
+    {
+        return "cellSearch"
+    }
+    
+    @IBAction func addToBookmarksButton(sender: AnyObject)
+    {
+        
     }
     
 }

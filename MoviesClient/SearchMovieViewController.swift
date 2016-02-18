@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SearchMovieViewController.swift
 //  MoviesClient
 //
 //  Created by Sergey Salnikov on 05.02.16.
@@ -11,91 +11,99 @@ import Alamofire
 import ObjectMapper
 import AFNetworking
 
-class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, MovieFactoryDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
     var searchActive : Bool = false
-    var data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
-    var filtered: [String] = []
 
     var imdbIDArray = Array<AnyObject>()
-    var movie:FoundMovie?
+    var movie: FoundMovie?
     var bookmarksMovieArray = Array<BookmarkMovie>()
-    var foundMovieArray: [FoundMovie] = []
+    var foundMovieArray = Array<FoundMovie>()
+    
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        
+        MovieFactory.sharedInstance.delegate = self
+        
+        self.searchBar.resignFirstResponder()
+        
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.estimatedRowHeight = 200.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         searchBar.delegate = self
         
-        let nib = UINib(nibName: "SearchTableViewCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier:"cell")
-
-        FactoryFoundMovie.sharedInstance.collectorIdFoundMovieBySearch { (foundMovieArray) -> Void in
-            self.foundMovieArray = foundMovieArray
-            self.tableView.reloadData()
-        }
+        self.view.endEditing(true)
         
-    }
-
-    override func viewDidAppear(animated: Bool)
-    {
-        tableView.reloadData()
+        tableView.registerNib(SearchTableViewCell.nibSearchCell(), forCellReuseIdentifier: SearchTableViewCell.cellSearchReuseIdentifier())
     }
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
-    {
-        searchActive = true;
-    }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar)
-    {
-        searchActive = false;
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar)
-    {
-        searchActive = false;
-    }
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+//    {
+//        searchActive = false;
+////        self.searchBar.endEditing(true)
+//    }
+//    
+//    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
+//    {
+//        searchActive = true;
+//    }
+//    
+//    func searchBarTextDidEndEditing(searchBar: UISearchBar)
+//    {
+//        searchActive = false;
+//    }
+//    
+//    func searchBarCancelButtonClicked(searchBar: UISearchBar)
+//    {
+//        searchActive = false;
+//    }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
         searchActive = false;
+        self.searchBar.endEditing(true)
+        self.view.endEditing(true)
+        self.searchBar.resignFirstResponder()
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
-        print("Search Text: \(searchText)")
-        filtered = data.filter({ (text) -> Bool in
-            
-            let tmp: NSString = text
-            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-            
-            return range.location != NSNotFound
-        })
+        print(searchText)
         
-        if (filtered.count == 0) {
-            searchActive = false;
-        } else {
-            searchActive = true;
+        if (searchText.characters.count == 1 || searchText.characters.count == 0) { /*I love fuck animal!*/ } else {
+            
+            let regexExpression = ".*[^A-Za-z0-9].*"
+            let predicat = NSPredicate(format:"SELF MATCHES %@", regexExpression)
+            let result = predicat.evaluateWithObject(searchText)
+            
+            if (result) {
+                
+                self.showValidateError()
+                
+            } else {
+                
+                MovieFactory.sharedInstance.collectorIdFoundMovieBySearch(searchString: searchText) { (foundMovieArray) -> Void in
+                    self.foundMovieArray = foundMovieArray
+                    self.tableView.reloadData()
+                    
+                }
+            }
         }
         
-        self.tableView.reloadData()
     }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
-    {
-        return UITableViewAutomaticDimension
-    }
+//    
+//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+//    {
+//        return UITableViewAutomaticDimension
+//    }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
@@ -109,33 +117,40 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-//        if (searchActive) {
-//            return filtered.count
-//        }
-        
         return self.foundMovieArray.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-//        tableView.registerClass(SearchTableViewCell.self, forCellReuseIdentifier: "cell")
-        let stringTest1 = "The first line of code sets the estimated row height of the cell, which is the height of the existing prototype cell."
-        let stringTest2 = "The first line of code sets the estimated row height of the cell, which is the height of the existing prototype cell. The second line changes the rowHeight property to UITableViewAutomaticDimension, which is the default row height in iOS 8. In other words, you tell table view to figure out the cell size based on other information.If you test the app, the cell is still not resized. The reason is that both name and address labels are set to 1-line. So set the number of lines to zero and let the label grow automatically."
-        let stringTest3 = "USA - 1995"
-        let cell: SearchTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! SearchTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(SearchTableViewCell.cellSearchReuseIdentifier()) as! SearchTableViewCell
         let foundMovie: FoundMovie = self.foundMovieArray[indexPath.row]
         cell.titleMovieLabel.text = foundMovie.title
         cell.movieDescriptionLabel.text = foundMovie.plot
         cell.countryDataLabel.text = foundMovie.country+" - "+foundMovie.year
         cell.imageMovie.setImageWithURL(NSURL(string: foundMovie.poster)!)
-
-//        if (searchActive) {
-//            cell.textLabel?.text = filtered[indexPath.row]
-//        } else {
-//            cell.textLabel?.text = data[indexPath.row];
-//        }
         
         return cell;
+    }
+    
+    func showSearchError(movieTitle title: String)
+    {
+        let alertController = UIAlertController(title: "Ошибка ввода!", message: "Фильм "+title+" не найден", preferredStyle: .Alert)
+        let actionOk = UIAlertAction(title: "Повторить ввод", style: .Default) { (action) in
+            self.searchBar.text?.removeAll()
+        }
+        alertController.addAction(actionOk)
+        self.presentViewController(alertController, animated: true) { () -> Void in }
+    }
+    
+    func showValidateError()
+    {
+        let alertController = UIAlertController(title: "Ошибка ввода!", message: "Строка должна содержать только символы латинского алфавита", preferredStyle: .Alert)
+        let actionOk = UIAlertAction(title: "Повторить ввод", style: .Default) { (action) in
+            self.searchBar.text?.removeAll()
+        }
+        alertController.addAction(actionOk)
+        self.presentViewController(alertController, animated: true) { () -> Void in }
+        
     }
 
 }

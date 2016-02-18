@@ -17,7 +17,7 @@
         <!--Search Movie View Controller-->
         <scene sceneID="yFI-Ga-OMc">
             <objects>
-                <viewController id="wAH-hf-ZQI" customClass="SearchMovieViewController" customModule="MoviesClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchMovieVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wAH-hf-ZQI" customClass="SearchMovieViewController" customModule="MoviesClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="3x3-4N-z1Z"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BPN-ON-m9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -27,7 +27,7 @@
         <!--Splash Screen View Controller-->
         <scene sceneID="VVg-SZ-Mtg">
             <objects>
-                <viewController id="kCs-eG-7Kp" customClass="SplashScreenViewController" customModule="MoviesClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SplashScreen" id="kCs-eG-7Kp" customClass="SplashScreenViewController" customModule="MoviesClient" customModuleProvider="target" sceneMemberID="viewController">
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1sr-S5-ijg" userLabel="First Responder" sceneMemberID="firstResponder"/>

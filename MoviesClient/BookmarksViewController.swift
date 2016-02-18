@@ -1,5 +1,5 @@
 //
-//  MCBookmarksViewController.swift
+//  BookmarksViewController.swift
 //  MoviesClient
 //
 //  Created by Sergey Salnikov on 06.02.16.

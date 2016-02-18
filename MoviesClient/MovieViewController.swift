@@ -1,5 +1,5 @@
 //
-//  MCMovieViewController.swift
+//  MovieViewController.swift
 //  
 //
 //  Created by Sergey Salnikov on 06.02.16.

@@ -4,5 +4,4 @@
 
 #import <Foundation/Foundation.h>
 #import <FMDB/FMDatabase.h>
-#import <RETableViewManager/RETableViewManager.h>
 #import <AFNetworking/AFNetworking.h>
