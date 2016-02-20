@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import ObjectMapper
 
+
 protocol MovieFactoryDelegate
 {
     func showSearchError(movieTitle title: String)
@@ -31,7 +32,7 @@ class MovieFactory: NSObject {
         return Static.instance!
     }
 
-    func collectorIdFoundMovieBySearch(searchString text: String, completion: [FoundMovie] -> Void) -> Void
+    func collectorFoundMovie(searchString text: String, completion: [FoundMovie] -> Void) -> Void
     {
         var imdbIDArray = Array<String>()
         var foundMovieArray = Array<FoundMovie>()
@@ -79,6 +80,22 @@ class MovieFactory: NSObject {
         }//End Alamofire
 
     }//End Function
+    
+    func collectorBookmarkMovie(bookmarkMovieID bookmarkMovieID: String, completion: BookmarkMovie -> Void) -> Void
+    {
+        var bookmarkMovie: BookmarkMovie?
+        
+        let urlSearchByID = self.createUrlForSearchByID(insertID: bookmarkMovieID)
+        Alamofire.request(.GET, urlSearchByID, parameters: ["foo": "bar"])
+            .responseJSON { response in
+                
+                if let JSON = response.result.value {
+                    bookmarkMovie = Mapper<BookmarkMovie>().map(JSON)
+                    completion(bookmarkMovie!)
+                }
+        }
+    }
+    
     
     func createUrlForSearchByID(insertID id: String) -> String
     {

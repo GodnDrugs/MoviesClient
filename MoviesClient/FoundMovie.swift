@@ -12,6 +12,7 @@ import ObjectMapper
 
 class FoundMovie: Mappable {
     
+    var id: String?
     var title: String!
     var year: String!
     var country: String!
@@ -24,11 +25,12 @@ class FoundMovie: Mappable {
     
     func mapping(map: Map) {
         
-        title <- map["Title"]
-        year <- map["Year"]
-        country <- map["Country"]
-        poster <- map["Poster"]
-        plot <- map["Plot"]
+        self.id <- map["imdbID"]
+        self.title <- map["Title"]
+        self.year <- map["Year"]
+        self.country <- map["Country"]
+        self.poster <- map["Poster"]
+        self.plot <- map["Plot"]
         
     }
 }

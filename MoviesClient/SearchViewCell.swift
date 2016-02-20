@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchTableViewCell: UITableViewCell {
+class SearchViewCell: UITableViewCell {
 
     @IBOutlet weak var titleMovieLabel: UILabel!
     @IBOutlet weak var countryDataLabel: UILabel!
@@ -35,12 +35,10 @@ class SearchTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-
-    
+        
     class func nibSearchCell() -> UINib
     {
-        let nib = UINib(nibName: "SearchTableViewCell", bundle: nil)
+        let nib = UINib(nibName: "SearchViewCell", bundle: nil)
         
         return nib
     }

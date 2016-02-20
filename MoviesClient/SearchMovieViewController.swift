@@ -11,7 +11,7 @@ import Alamofire
 import ObjectMapper
 import AFNetworking
 
-class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, MovieFactoryDelegate {
+class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, MovieFactoryDelegate, UITabBarControllerDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -23,7 +23,6 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     var bookmarksMovieArray = Array<BookmarkMovie>()
     var foundMovieArray = Array<FoundMovie>()
     
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -32,16 +31,28 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         
         self.searchBar.resignFirstResponder()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
         
         searchBar.delegate = self
         
         self.view.endEditing(true)
         
-        tableView.registerNib(SearchTableViewCell.nibSearchCell(), forCellReuseIdentifier: SearchTableViewCell.cellSearchReuseIdentifier())
+        tableView.registerNib(SearchViewCell.nibSearchCell(), forCellReuseIdentifier: SearchViewCell.cellSearchReuseIdentifier())
+    }
+    
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+        if (viewController .isKindOfClass(BookmarksViewController)) {
+            let testArray = ["1", "2", "3"]
+            let vc = BookmarksViewController()
+            vc.testArray = testArray
+            print("inner")
+        }
+        
+        return true
     }
     
     
@@ -90,7 +101,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
                 
             } else {
                 
-                MovieFactory.sharedInstance.collectorIdFoundMovieBySearch(searchString: searchText) { (foundMovieArray) -> Void in
+                MovieFactory.sharedInstance.collectorFoundMovie(searchString: searchText) { (foundMovieArray) -> Void in
                     self.foundMovieArray = foundMovieArray
                     self.tableView.reloadData()
                     
@@ -122,14 +133,26 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(SearchTableViewCell.cellSearchReuseIdentifier()) as! SearchTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
         let foundMovie: FoundMovie = self.foundMovieArray[indexPath.row]
         cell.titleMovieLabel.text = foundMovie.title
         cell.movieDescriptionLabel.text = foundMovie.plot
         cell.countryDataLabel.text = foundMovie.country+" - "+foundMovie.year
         cell.imageMovie.setImageWithURL(NSURL(string: foundMovie.poster)!)
         
-        return cell;
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let foundMovie = self.foundMovieArray[indexPath.row]
+        let movieID = foundMovie.id
+        
+        MovieFactory.sharedInstance.collectorBookmarkMovie(bookmarkMovieID: movieID!) { (bookmarkMovie) -> Void in
+            let bookmarkMovieAppend = bookmarkMovie
+            self.bookmarksMovieArray.append(bookmarkMovieAppend)
+        }
+
     }
     
     func showSearchError(movieTitle title: String)

@@ -17,10 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashScreenViewControlle
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
-//        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-//        addLoadingIndicator()
-//        activityIndicator.startAnimating()
-
+        
+//        let testID = "tt0111161"
+//        MovieFactory.sharedInstance.collectorBookmarkMovie(bookmarkMovieID: testID) { (bookmarkMovie) -> Void in
+//            let title = bookmarkMovie.title
+//            print(title)
+//        }
         
         UINavigationBar.appearance().barTintColor = UIColor.greenColor()
         UISearchBar.appearance().barTintColor = UIColor.greenColor()
@@ -35,24 +37,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashScreenViewControlle
         
         return true
     }
-    
-//    lazy private var activityIndicator : CustomActivityIndicatorView = {
-//        let image : UIImage = UIImage(named: "loading")!
-//        return CustomActivityIndicatorView(image: image)
-//    }()
-//    
-//    func addLoadingIndicator ()
-//    {
-//        self.window!.addSubview(activityIndicator)
-//        activityIndicator.center = self.window!.center
-//    }
-    
+
     func splashScreenViewControllerWasFinishedLoading()
     {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let tabBarController  = storyboard.instantiateViewControllerWithIdentifier("tabBarController") as! UITabBarController
+        
         let vc = storyboard.instantiateViewControllerWithIdentifier("SearchMovieVC") as! SearchMovieViewController
-        self.window!.rootViewController = UINavigationController(rootViewController: vc)
+        self.window!.rootViewController = UINavigationController(rootViewController: tabBarController)
         self.window!.makeKeyAndVisible()
     }
 

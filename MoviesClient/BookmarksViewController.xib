@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookmarksViewController" customModule="MoviesClient" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="oct-rd-nMk" id="R7f-i3-MF7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,8 +14,20 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="0.1146285871" green="0.10618185149999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oct-rd-nMk">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="oct-rd-nMk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1Jh-E2-ony"/>
+                <constraint firstAttribute="trailing" secondItem="oct-rd-nMk" secondAttribute="trailing" id="I8o-1L-lBt"/>
+                <constraint firstItem="oct-rd-nMk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OYc-lg-ep5"/>
+                <constraint firstAttribute="bottom" secondItem="oct-rd-nMk" secondAttribute="bottom" id="vhv-M4-Ss6"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="37" y="129"/>
         </view>
     </objects>
 </document>

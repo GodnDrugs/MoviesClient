@@ -13,7 +13,7 @@ import ObjectMapper
 class BookmarkMovie: Mappable {
 
     var title: String?
-    var year: Int?
+    var year: String?
     var rated: String?
     var released: String?
     var runtime: String?

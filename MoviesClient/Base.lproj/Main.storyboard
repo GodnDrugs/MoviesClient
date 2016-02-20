@@ -37,7 +37,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="L4n-hs-jPM">
             <objects>
-                <tabBarController id="n0V-AN-Tfs" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarController" id="n0V-AN-Tfs" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="1g5-sE-oHg"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Ndr-2D-c86">
