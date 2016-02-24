@@ -15,18 +15,13 @@ class SearchViewCell: UITableViewCell {
     @IBOutlet weak var movieDescriptionLabel: UILabel!
     @IBOutlet weak var imageMovie: UIImageView!
     @IBOutlet weak var cardView: UIView!
-    @IBOutlet weak var addToBookmarksButtonProperty: UIButton!
-    
-
     
     override func awakeFromNib()
     {
         super.awakeFromNib()
         
-        self.addToBookmarksButtonProperty.setTitle("Добавить в закладки", forState: UIControlState.Normal)
         self.cardView.layer.borderWidth = 1.0
         self.cardView.layer.borderColor = UIColor.grayColor().CGColor
-        
     }
 
     override func setSelected(selected: Bool, animated: Bool)
@@ -46,11 +41,6 @@ class SearchViewCell: UITableViewCell {
     class func cellSearchReuseIdentifier() -> String
     {
         return "cellSearch"
-    }
-    
-    @IBAction func addToBookmarksButton(sender: AnyObject)
-    {
-        
     }
     
 }

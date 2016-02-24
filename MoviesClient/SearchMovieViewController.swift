@@ -11,7 +11,8 @@ import Alamofire
 import ObjectMapper
 import AFNetworking
 
-class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, MovieFactoryDelegate, UITabBarControllerDelegate {
+
+class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, MovieFactoryDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -20,12 +21,17 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
 
     var imdbIDArray = Array<AnyObject>()
     var movie: FoundMovie?
-    var bookmarksMovieArray = Array<BookmarkMovie>()
-    var foundMovieArray = Array<FoundMovie>()
+    var bookmarkMovie: BookmarkMovie?
+    var movieForDisplay = Array<AnyObject>()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+//       DatabaseManager.sharedInstance.getLastSearchResult({ (resultFoundMovie) -> Void in
+//        self.movieForDisplay = resultFoundMovie
+//        self.tableView.reloadData()
+//       })
         
         MovieFactory.sharedInstance.delegate = self
         
@@ -35,25 +41,29 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.dataSource = self
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        
-        
         searchBar.delegate = self
+        
+//        self.tabBarController?.delegate = self
         
         self.view.endEditing(true)
         
         tableView.registerNib(SearchViewCell.nibSearchCell(), forCellReuseIdentifier: SearchViewCell.cellSearchReuseIdentifier())
     }
     
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        if (viewController .isKindOfClass(BookmarksViewController)) {
-            let testArray = ["1", "2", "3"]
-            let vc = BookmarksViewController()
-            vc.testArray = testArray
-            print("inner")
-        }
-        
-        return true
-    }
+//    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+//        print("")
+//    }
+
+    
+//    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+//        if (viewController .isKindOfClass(BookmarksViewController)) {
+//            let bookmarkVC = self.tabBarController?.viewControllers![1] as? BookmarksViewController
+//            bookmarkVC?.bookmarksMovieArray = self.bookmarksMovieArray
+//            print("")
+//        }
+//        
+//        return true
+//    }
     
     
 //    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -89,7 +99,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     {
         print(searchText)
         
-        if (searchText.characters.count == 1 || searchText.characters.count == 0) { /*I love fuck animal!*/ } else {
+        if (searchText.characters.count == 1 || searchText.characters.count == 0) { /* I love fuck animal! */ } else {
             
             let regexExpression = ".*[^A-Za-z0-9].*"
             let predicat = NSPredicate(format:"SELF MATCHES %@", regexExpression)
@@ -102,8 +112,9 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
             } else {
                 
                 MovieFactory.sharedInstance.collectorFoundMovie(searchString: searchText) { (foundMovieArray) -> Void in
-                    self.foundMovieArray = foundMovieArray
+                    self.movieForDisplay = foundMovieArray
                     self.tableView.reloadData()
+                    DatabaseManager.sharedInstance.saveSearchResult(resultToSave: foundMovieArray)
                     
                 }
             }
@@ -128,31 +139,64 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return self.foundMovieArray.count;
+        return self.movieForDisplay.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
-        let foundMovie: FoundMovie = self.foundMovieArray[indexPath.row]
-        cell.titleMovieLabel.text = foundMovie.title
-        cell.movieDescriptionLabel.text = foundMovie.plot
-        cell.countryDataLabel.text = foundMovie.country+" - "+foundMovie.year
-        cell.imageMovie.setImageWithURL(NSURL(string: foundMovie.poster)!)
+        let foundMovie = self.movieForDisplay[indexPath.row]
         
+        if foundMovie .isKindOfClass(ResultFoundMovie) {
+            
+//            let cellDisplayResultSearch = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
+
+            let movie = foundMovie as! ResultFoundMovie
+            
+            cell.titleMovieLabel.text = foundMovie.title
+            cell.movieDescriptionLabel.text = movie.plot
+            cell.countryDataLabel.text = movie.country!+" - "+movie.year!
+            cell.imageMovie.setImageWithURL(NSURL(string: movie.poster!)!)
+            
+//            cell = cellDisplayResultSearch
+            
+        } else {
+            
+//            let cellDisplayFoundMovie = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
+            
+            let movie = foundMovie as! FoundMovie
+            
+            cell.titleMovieLabel.text = movie.title
+            cell.movieDescriptionLabel.text = movie.plot
+            cell.countryDataLabel.text = movie.country!+" - "+movie.year!
+            cell.imageMovie.setImageWithURL(NSURL(string: movie.poster!)!)
+            print("")
+            
+//            cell = cellDisplayFoundMovie
+        }
+
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let foundMovie = self.foundMovieArray[indexPath.row]
+        let foundMovie = self.movieForDisplay[indexPath.row] as! FoundMovie
         let movieID = foundMovie.id
         
         MovieFactory.sharedInstance.collectorBookmarkMovie(bookmarkMovieID: movieID!) { (bookmarkMovie) -> Void in
-            let bookmarkMovieAppend = bookmarkMovie
-            self.bookmarksMovieArray.append(bookmarkMovieAppend)
+            self.bookmarkMovie = bookmarkMovie
+            print("")
+            self.performSegueWithIdentifier("toDetailMovieVC", sender: self)
         }
-
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "toDetailMovieVC") {
+            var vc = DetailMovieViewController()
+            vc = segue.destinationViewController as! DetailMovieViewController
+            vc.bookmarkMovie = self.bookmarkMovie
+        }
     }
     
     func showSearchError(movieTitle title: String)

@@ -7,18 +7,36 @@
         <!--Bookmarks View Controller-->
         <scene sceneID="gWd-MK-Zby">
             <objects>
-                <viewController id="g7g-ce-jQf" customClass="BookmarksViewController" customModule="MoviesClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookmarkVC" id="g7g-ce-jQf" customClass="BookmarksViewController" customModule="MoviesClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="bookmarks" id="tJZ-zP-FWt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VjG-6C-OAU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-336" y="461"/>
         </scene>
+        <!--Title-->
+        <scene sceneID="OSN-MP-olk">
+            <objects>
+                <viewController storyboardIdentifier="DetailMovieVC" id="eui-SF-bNJ" customClass="DetailMovieViewController" customModule="MoviesClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Title" id="sfU-at-TkC">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="yte-aI-7xT"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YOJ-7N-KcP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="33" y="-75"/>
+        </scene>
         <!--Search Movie View Controller-->
         <scene sceneID="yFI-Ga-OMc">
             <objects>
                 <viewController storyboardIdentifier="SearchMovieVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wAH-hf-ZQI" customClass="SearchMovieViewController" customModule="MoviesClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="3x3-4N-z1Z"/>
+                    <connections>
+                        <segue destination="eui-SF-bNJ" kind="show" identifier="toDetailMovieVC" id="wRe-hX-os3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BPN-ON-m9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -32,7 +50,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1sr-S5-ijg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="12" y="-75"/>
+            <point key="canvasLocation" x="33" y="461"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="L4n-hs-jPM">

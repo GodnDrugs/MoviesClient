@@ -17,8 +17,9 @@ class BookmarkMovieViewCell: UITableViewCell {
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var cardView: UIView!
-//    @IBOutlet weak var bookmarkImage: UIImageView!
-//    @IBOutlet weak var posterImage: UIImageView!
+    @IBOutlet weak var directorLabel: UILabel!
+    @IBOutlet weak var bookmarkImage: UIImageView!
+    @IBOutlet weak var posterImage: UIImageView!
     
     override func awakeFromNib()
     {

@@ -26,8 +26,8 @@ class BookmarkMovie: Mappable {
     var country: String?
     var awards: String?
     var poster: String?
-    var metascore: Int?
-    var imdbRating: Int?
+    var metascore: String?
+    var imdbRating: String?
     var imdbVotes: String?
     var imdbID: String?
     var type: String?

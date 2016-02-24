@@ -17,18 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashScreenViewControlle
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
-        
-//        let testID = "tt0111161"
-//        MovieFactory.sharedInstance.collectorBookmarkMovie(bookmarkMovieID: testID) { (bookmarkMovie) -> Void in
-//            let title = bookmarkMovie.title
-//            print(title)
-//        }
-        
         UINavigationBar.appearance().barTintColor = UIColor.greenColor()
         UISearchBar.appearance().barTintColor = UIColor.greenColor()
         UISearchBar.appearance().placeholder = "Поиск"
         UISearchBar.appearance().tintColor = UIColor.whiteColor()
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let splashScreen = storyboard.instantiateViewControllerWithIdentifier("SplashScreen") as! SplashScreenViewController
         splashScreen.delegate = AppDelegate()
@@ -44,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashScreenViewControlle
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let tabBarController  = storyboard.instantiateViewControllerWithIdentifier("tabBarController") as! UITabBarController
         
-        let vc = storyboard.instantiateViewControllerWithIdentifier("SearchMovieVC") as! SearchMovieViewController
+//        let vc = storyboard.instantiateViewControllerWithIdentifier("SearchMovieVC") as! SearchMovieViewController
         self.window!.rootViewController = UINavigationController(rootViewController: tabBarController)
         self.window!.makeKeyAndVisible()
     }

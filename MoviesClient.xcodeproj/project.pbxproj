@@ -10,8 +10,6 @@
 		6401199F1C722E8800AF159F /* MovieFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6401199E1C722E8800AF159F /* MovieFactory.swift */; };
 		640B09FB1C66572000B0421A /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640B09F91C66571F00B0421A /* BookmarksViewController.swift */; };
 		640B09FC1C66572000B0421A /* BookmarksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 640B09FA1C66572000B0421A /* BookmarksViewController.xib */; };
-		640B0A031C665AEF00B0421A /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640B0A011C665AEF00B0421A /* MovieViewController.swift */; };
-		640B0A041C665AEF00B0421A /* MovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 640B0A021C665AEF00B0421A /* MovieViewController.xib */; };
 		641D932E1C68AB8C00FB727B /* SearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641D932C1C68AB8C00FB727B /* SearchViewCell.swift */; };
 		641D932F1C68AB8C00FB727B /* SearchViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 641D932D1C68AB8C00FB727B /* SearchViewCell.xib */; };
 		641D93341C68D44800FB727B /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641D93321C68D44800FB727B /* SplashScreenViewController.swift */; };
@@ -29,6 +27,12 @@
 		64E1A2EF1C64E81B003B47D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64E1A2ED1C64E81B003B47D9 /* LaunchScreen.storyboard */; };
 		64E1A2FC1C64F54A003B47D9 /* SearchMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64E1A2FB1C64F54A003B47D9 /* SearchMovieViewController.xib */; };
 		64E4D0611C752DDA000220F4 /* CustomActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E4D0601C752DDA000220F4 /* CustomActivityIndicatorView.swift */; };
+		64E64EF31C79FA4F00920151 /* movieclient.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 64E64EF21C79FA4F00920151 /* movieclient.sqlite */; };
+		64ED076D1C7C91B200F50A6B /* ResultFoundMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ED076C1C7C91B200F50A6B /* ResultFoundMovie.swift */; };
+		64ED07701C7CF02E00F50A6B /* DetailMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ED076E1C7CF02E00F50A6B /* DetailMovieViewController.swift */; };
+		64ED07711C7CF02E00F50A6B /* DetailMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64ED076F1C7CF02E00F50A6B /* DetailMovieViewController.xib */; };
+		64ED07741C7CF69400F50A6B /* DetailMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ED07721C7CF69400F50A6B /* DetailMovieCell.swift */; };
+		64ED07751C7CF69400F50A6B /* DetailMovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64ED07731C7CF69400F50A6B /* DetailMovieCell.xib */; };
 		96F4E47BC2CB142C02D721DB /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBC5FB14701FDA946CAAE76 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -37,8 +41,6 @@
 		6401199E1C722E8800AF159F /* MovieFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieFactory.swift; sourceTree = "<group>"; };
 		640B09F91C66571F00B0421A /* BookmarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
 		640B09FA1C66572000B0421A /* BookmarksViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarksViewController.xib; sourceTree = "<group>"; };
-		640B0A011C665AEF00B0421A /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
-		640B0A021C665AEF00B0421A /* MovieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieViewController.xib; sourceTree = "<group>"; };
 		641D932C1C68AB8C00FB727B /* SearchViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewCell.swift; sourceTree = "<group>"; };
 		641D932D1C68AB8C00FB727B /* SearchViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewCell.xib; sourceTree = "<group>"; };
 		641D93321C68D44800FB727B /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +63,12 @@
 		64E1A2FB1C64F54A003B47D9 /* SearchMovieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMovieViewController.xib; sourceTree = "<group>"; };
 		64E2AD6B1C75FACA002A55DA /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		64E4D0601C752DDA000220F4 /* CustomActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicatorView.swift; sourceTree = "<group>"; };
+		64E64EF21C79FA4F00920151 /* movieclient.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = movieclient.sqlite; sourceTree = "<group>"; };
+		64ED076C1C7C91B200F50A6B /* ResultFoundMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultFoundMovie.swift; sourceTree = "<group>"; };
+		64ED076E1C7CF02E00F50A6B /* DetailMovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailMovieViewController.swift; sourceTree = "<group>"; };
+		64ED076F1C7CF02E00F50A6B /* DetailMovieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailMovieViewController.xib; sourceTree = "<group>"; };
+		64ED07721C7CF69400F50A6B /* DetailMovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailMovieCell.swift; sourceTree = "<group>"; };
+		64ED07731C7CF69400F50A6B /* DetailMovieCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailMovieCell.xib; sourceTree = "<group>"; };
 		ADBC5FB14701FDA946CAAE76 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1323F2CCAC4E5C8BA2C70DB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,13 +166,12 @@
 		64E1A2F71C64EC1D003B47D9 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				64E4D0601C752DDA000220F4 /* CustomActivityIndicatorView.swift */,
-				640B0A011C665AEF00B0421A /* MovieViewController.swift */,
-				640B0A021C665AEF00B0421A /* MovieViewController.xib */,
 				64E1A2E61C64E81B003B47D9 /* SearchMovieViewController.swift */,
 				64E1A2FB1C64F54A003B47D9 /* SearchMovieViewController.xib */,
 				640B09F91C66571F00B0421A /* BookmarksViewController.swift */,
 				640B09FA1C66572000B0421A /* BookmarksViewController.xib */,
+				64ED076E1C7CF02E00F50A6B /* DetailMovieViewController.swift */,
+				64ED076F1C7CF02E00F50A6B /* DetailMovieViewController.xib */,
 				641D93321C68D44800FB727B /* SplashScreenViewController.swift */,
 				641D93331C68D44800FB727B /* SplashScreenViewController.xib */,
 			);
@@ -183,6 +190,7 @@
 		64E1A2FA1C64EC9F003B47D9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				64E64EF21C79FA4F00920151 /* movieclient.sqlite */,
 				64B327C21C73501900DCE5E7 /* MoviesClient-Bridging-Header.h */,
 				64E1A2EB1C64E81B003B47D9 /* Assets.xcassets */,
 			);
@@ -196,6 +204,8 @@
 				641D932D1C68AB8C00FB727B /* SearchViewCell.xib */,
 				64B13CB91C775ADF000E6391 /* BookmarkMovieViewCell.swift */,
 				64B13CBA1C775ADF000E6391 /* BookmarkMovieViewCell.xib */,
+				64ED07721C7CF69400F50A6B /* DetailMovieCell.swift */,
+				64ED07731C7CF69400F50A6B /* DetailMovieCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -204,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				64E08F5D1C69F7DB008ED2DA /* FoundMovie.swift */,
+				64ED076C1C7C91B200F50A6B /* ResultFoundMovie.swift */,
 				644414DA1C6CBC0F006E8D36 /* BookmarkMovie.swift */,
 			);
 			name = Models;
@@ -213,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				6401199E1C722E8800AF159F /* MovieFactory.swift */,
+				64E4D0601C752DDA000220F4 /* CustomActivityIndicatorView.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -280,11 +292,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				64E1A2EF1C64E81B003B47D9 /* LaunchScreen.storyboard in Resources */,
+				64ED07751C7CF69400F50A6B /* DetailMovieCell.xib in Resources */,
+				64E64EF31C79FA4F00920151 /* movieclient.sqlite in Resources */,
 				64E1A2EC1C64E81B003B47D9 /* Assets.xcassets in Resources */,
 				641D932F1C68AB8C00FB727B /* SearchViewCell.xib in Resources */,
 				640B09FC1C66572000B0421A /* BookmarksViewController.xib in Resources */,
-				640B0A041C665AEF00B0421A /* MovieViewController.xib in Resources */,
 				64B13CBC1C775ADF000E6391 /* BookmarkMovieViewCell.xib in Resources */,
+				64ED07711C7CF02E00F50A6B /* DetailMovieViewController.xib in Resources */,
 				641D93351C68D44800FB727B /* SplashScreenViewController.xib in Resources */,
 				64E1A2FC1C64F54A003B47D9 /* SearchMovieViewController.xib in Resources */,
 				64E1A2EA1C64E81B003B47D9 /* Main.storyboard in Resources */,
@@ -346,11 +360,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64ED076D1C7C91B200F50A6B /* ResultFoundMovie.swift in Sources */,
 				64E4D0611C752DDA000220F4 /* CustomActivityIndicatorView.swift in Sources */,
+				64ED07701C7CF02E00F50A6B /* DetailMovieViewController.swift in Sources */,
 				641D93561C68DDDB00FB727B /* DatabaseManager.swift in Sources */,
 				64E1A2E71C64E81B003B47D9 /* SearchMovieViewController.swift in Sources */,
 				641D93341C68D44800FB727B /* SplashScreenViewController.swift in Sources */,
-				640B0A031C665AEF00B0421A /* MovieViewController.swift in Sources */,
+				64ED07741C7CF69400F50A6B /* DetailMovieCell.swift in Sources */,
 				641D932E1C68AB8C00FB727B /* SearchViewCell.swift in Sources */,
 				644414DB1C6CBC10006E8D36 /* BookmarkMovie.swift in Sources */,
 				641D93581C68DDFB00FB727B /* NetworkingManager.swift in Sources */,
