@@ -19,12 +19,6 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     {
         super.viewDidLoad()
         
-//        DatabaseManager.sharedInstance.getMovieBookmarks { (bookmarkMovieArray) -> Void in
-//            self.bookmarksMovieArray = bookmarkMovieArray
-//            self.tableView.reloadData()
-//            print("")
-//        }
-        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.rowHeight = UITableViewAutomaticDimension

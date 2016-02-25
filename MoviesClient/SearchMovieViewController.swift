@@ -40,8 +40,6 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         searchBar.delegate = self
         
-//        self.tabBarController?.delegate = self
-        
         self.view.endEditing(true)
         
         tableView.registerNib(SearchViewCell.nibSearchCell(), forCellReuseIdentifier: SearchViewCell.cellSearchReuseIdentifier())
@@ -59,29 +57,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
             self.tableView.reloadData()
         })
     }
-    
-    
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
-//    {
-//        searchActive = false;
-////        self.searchBar.endEditing(true)
-//    }
-//    
-//    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
-//    {
-//        searchActive = true;
-//    }
-//    
-//    func searchBarTextDidEndEditing(searchBar: UISearchBar)
-//    {
-//        searchActive = false;
-//    }
-//    
-//    func searchBarCancelButtonClicked(searchBar: UISearchBar)
-//    {
-//        searchActive = false;
-//    }
-    
+
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
         searchActive = false;
@@ -116,11 +92,6 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
     }
-//    
-//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
-//    {
-//        return UITableViewAutomaticDimension
-//    }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {

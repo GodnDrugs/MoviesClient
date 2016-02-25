@@ -18,7 +18,6 @@ let createBookmarksTableQuery = "CREATE  TABLE  IF NOT EXISTS bookmarks (id INTE
 
 class DatabaseManager: NSObject {
     
-//    let db: FMDatabase
     let queue: FMDatabaseQueue
 
     class var sharedInstance: DatabaseManager {
@@ -41,22 +40,7 @@ class DatabaseManager: NSObject {
         
         let databasePathString = databasePathUrl.path
         
-//        if !NSFileManager.defaultManager().fileExistsAtPath(databasePathString!) {
-//            let pathToBundledDatabase = NSBundle.mainBundle().resourcePath!.stringByAppendingPathComponent(kDatabaseName)
-//            
-//            do {
-//                try NSFileManager.defaultManager().copyItemAtPath(pathToBundledDatabase, toPath: databasePathString!)
-//            } catch let error as NSError {
-//                print("Cannot copy boundle database file : \(error.localizedDescription)")
-//            }
-//            
-//        }
         self.queue = FMDatabaseQueue(path: databasePathString)
-//        self.db = FMDatabase(path: databasePathString)
-//        let isOpened = self.queue.open()
-//        if !isOpened {
-//            print("Could not open \(kDatabaseName) database!")
-//        }
     }
     
     func saveSearchResult(resultToSave result: [FoundMovie]) -> Void
@@ -123,7 +107,7 @@ class DatabaseManager: NSObject {
     {
         var bookmarkMovieArray = Array<BookmarkMovie>()
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+        dispatch_async(dispatch_get_main_queue(), {
             self.queue.inDatabase({ (db) -> Void in
                 let rs = db.executeQuery("select * from bookmarks", withArgumentsInArray: nil)
 
@@ -161,7 +145,7 @@ class DatabaseManager: NSObject {
         let imdbVotes = movie.imdbVotes
         let imdbID = movie.imdbID
         let type = movie.type
-        ///Сделать проверку, чтобы не было одинаковых записей
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             self.queue.inTransaction({ db, rollback -> Void in
                 do {
@@ -196,33 +180,11 @@ class DatabaseManager: NSObject {
             })
         })
     }
-    
-//    func createTable() -> Void
-//    {
-////        self.db.closeOpenResultSets()
-//        do {
-//            try self.db.executeQuery(createTableQuery, values: nil)
-//        } catch let error as NSError {
-//            print("CANNOT CREATE TABLE: \(error.localizedDescription)")
-//        }
-//        print("LAST ERROR MESSAGE AFTER DROP TABLE\(self.db.lastErrorMessage())")
-//
-//    }
-    
-//    func dropTable() -> Void
-//    {
-////        self.db.closeOpenResultSets()
-//        let dropTableSuccessful = self.db.executeQuery(dropTableQuery, withArgumentsInArray: nil)
-//        if (dropTableSuccessful == nil) {
-//            print("Drop 'found_movies' table failure: \(self.db.lastErrorMessage())")
-//        }
-//        print("LAST ERROR MESSAGE AFTER DROP TABLE\(self.db.lastErrorMessage())")
-//    }
+
     
     deinit
     {
-//        self.queue.close()
-//        self.db.close()
+        self.queue.close()
     }
 
 }
