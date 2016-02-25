@@ -78,7 +78,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
             
             if (result) {
                 
-                self.showValidateError()
+//                self.showValidateError()
                 
             } else {
                 
@@ -128,7 +128,6 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         
         MovieFactory.sharedInstance.collectorBookmarkMovie(bookmarkMovieID: movieID!) { (bookmarkMovie) -> Void in
             self.bookmarkMovie = bookmarkMovie
-            print("")
             self.performSegueWithIdentifier("toDetailMovieVC", sender: self)
         }
         

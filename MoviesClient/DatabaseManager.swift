@@ -46,8 +46,8 @@ class DatabaseManager: NSObject {
     func saveSearchResult(resultToSave result: [FoundMovie]) -> Void
     {
         //            SELECT count(*) FROM sqlite_master WHERE type='table' AND name='found_movies';
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            
+//        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        dispatch_async(dispatch_get_main_queue(), {
             self.queue.inTransaction { db, rollback in
                 do {
                     let tableExist = db.tableExists("found_movies")

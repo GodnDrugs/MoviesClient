@@ -48,7 +48,7 @@ class MovieFactory: NSObject {
                     let response = dictionaryJSON.valueForKeyPath("Response") as! String
                     
                     if (response == "False") {
-                        self.delegate?.showSearchError(movieTitle: text)
+//                        self.delegate?.showSearchError(movieTitle: text)
                         return
                     }
                     
