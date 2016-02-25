@@ -17,6 +17,7 @@
 		641D93561C68DDDB00FB727B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641D93551C68DDDB00FB727B /* DatabaseManager.swift */; };
 		641D93581C68DDFB00FB727B /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641D93571C68DDFB00FB727B /* NetworkingManager.swift */; };
 		644414DB1C6CBC10006E8D36 /* BookmarkMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644414DA1C6CBC0F006E8D36 /* BookmarkMovie.swift */; };
+		648ECB311C7F2161005FC680 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 648ECB301C7F2161005FC680 /* MessageUI.framework */; };
 		64B13CBB1C775ADF000E6391 /* BookmarkMovieViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B13CB91C775ADF000E6391 /* BookmarkMovieViewCell.swift */; };
 		64B13CBC1C775ADF000E6391 /* BookmarkMovieViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64B13CBA1C775ADF000E6391 /* BookmarkMovieViewCell.xib */; };
 		64E08F5E1C69F7DB008ED2DA /* FoundMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E08F5D1C69F7DB008ED2DA /* FoundMovie.swift */; };
@@ -48,6 +49,7 @@
 		641D93551C68DDDB00FB727B /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		641D93571C68DDFB00FB727B /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		644414DA1C6CBC0F006E8D36 /* BookmarkMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkMovie.swift; sourceTree = "<group>"; };
+		648ECB301C7F2161005FC680 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		64B13CB91C775ADF000E6391 /* BookmarkMovieViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkMovieViewCell.swift; sourceTree = "<group>"; };
 		64B13CBA1C775ADF000E6391 /* BookmarkMovieViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkMovieViewCell.xib; sourceTree = "<group>"; };
 		64B327C21C73501900DCE5E7 /* MoviesClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoviesClient-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				648ECB311C7F2161005FC680 /* MessageUI.framework in Frameworks */,
 				64F6F03D1C7F0CC000967E7D /* Social.framework in Frameworks */,
 				96F4E47BC2CB142C02D721DB /* Pods.framework in Frameworks */,
 			);
@@ -87,6 +90,7 @@
 		25A44C10B86608FDC317811F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				648ECB301C7F2161005FC680 /* MessageUI.framework */,
 				64F6F03C1C7F0CC000967E7D /* Social.framework */,
 				ADBC5FB14701FDA946CAAE76 /* Pods.framework */,
 			);

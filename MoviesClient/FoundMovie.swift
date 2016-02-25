@@ -13,7 +13,7 @@ import FMDB
 
 class FoundMovie: NSObject, Mappable {
     
-    var id: String!
+    var imdbID: String!
     var title: String!
     var year: String!
     var country: String!
@@ -34,7 +34,7 @@ class FoundMovie: NSObject, Mappable {
     func mapping(map: Map)
     {
         
-        self.id <- map["imdbID"]
+        self.imdbID <- map["imdbID"]
         self.title <- map["Title"]
         self.year <- map["Year"]
         self.country <- map["Country"]
@@ -51,6 +51,7 @@ extension FoundMovie {
     {
         let foundMovie = FoundMovie()
         
+        foundMovie.imdbID = resultSet.stringForColumn("imdbID")
         foundMovie.title = resultSet.stringForColumn("title")
         foundMovie.year = resultSet.stringForColumn("year")
         foundMovie.country = resultSet.stringForColumn("country")

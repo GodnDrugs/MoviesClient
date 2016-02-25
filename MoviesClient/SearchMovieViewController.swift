@@ -153,7 +153,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         let foundMovie = self.foundMovieArray[indexPath.row]
-        let movieID = foundMovie.id
+        let movieID = foundMovie.imdbID
         
         MovieFactory.sharedInstance.collectorBookmarkMovie(bookmarkMovieID: movieID!) { (bookmarkMovie) -> Void in
             self.bookmarkMovie = bookmarkMovie

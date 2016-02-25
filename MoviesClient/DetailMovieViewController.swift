@@ -8,12 +8,13 @@
 
 import UIKit
 import Social
+import MessageUI
 
 
 let searchIdentifierVC = "searchVC"
 let bookmarkIdentifierVC = "bookmarkVC"
 
-class DetailMovieViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DetailMovieViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -81,9 +82,9 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         
         let emailAction = UIAlertAction(title: "Email share", style: .Default) {
             (alert: UIAlertAction!) -> Void in
-            //Code
+            self.presentModalMailComposeViewController(true)
         }
-
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {
             (alert: UIAlertAction!) -> Void in
             //Code
@@ -102,6 +103,33 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
 
         self.presentViewController(optionMenu, animated: true, completion: nil)
         
+    }
+    
+    func presentModalMailComposeViewController(animated: Bool)
+    {
+        let emailTitle = "Test Email"
+        let messageBody = "iOS programming is so fun!"
+        let toRecipents = ["support@appcoda.com"]
+        
+        let mc = MFMailComposeViewController()
+        mc.mailComposeDelegate = self
+        mc.setSubject(emailTitle)
+        mc.setMessageBody(messageBody, isHTML: false)
+        mc.setToRecipients(toRecipents)
+        
+        self.presentViewController(mc, animated: true) { () -> Void in
+            
+        }
+
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        
+        if error != nil {
+            print("Error: \(error)")
+        }
+        
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func addToBookmarksAlert() -> UIAlertAction

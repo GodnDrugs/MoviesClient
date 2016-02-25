@@ -83,6 +83,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.ratingLabel.text = "Rating: "+bookmarkMovie.imdbRating!
         cell.writersLabel.text = "Director: "+bookmarkMovie.writer!
         cell.typeLabel.text = "Type: "+bookmarkMovie.type!
+        cell.posterImage.setImageWithURL(NSURL(string: bookmarkMovie.poster)!)
         cell.descriptionLabel.text = "Short description: "+bookmarkMovie.plot!
 
         return cell
