@@ -108,9 +108,7 @@ class MovieFactory: NSObject {
     
     func createUrlForSearchByTitle(movieTitle title: String) -> String
     {
-        let baseURL = "http://www.omdbapi.com/?s="
-        let resultURL = baseURL+title
-        
+        let resultURL = "http://www.omdbapi.com/?s=\(title)"
         return resultURL
     }
     

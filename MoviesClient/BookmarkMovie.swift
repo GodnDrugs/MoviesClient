@@ -8,34 +8,42 @@
 
 import UIKit
 import ObjectMapper
+import FMDB
 
 
-class BookmarkMovie: Mappable {
+class BookmarkMovie: NSObject, Mappable {
 
-    var title: String?
-    var year: String?
-    var rated: String?
-    var released: String?
-    var runtime: String?
-    var genre: String?
-    var director: String?
-    var writer: String?
-    var actors: String?
-    var plot: String?
-    var language: String?
-    var country: String?
-    var awards: String?
-    var poster: String?
-    var metascore: String?
-    var imdbRating: String?
-    var imdbVotes: String?
-    var imdbID: String?
-    var type: String?
+    var title: String!
+    var year: String!
+    var rated: String!
+    var released: String!
+    var runtime: String!
+    var genre: String!
+    var director: String!
+    var writer: String!
+    var actors: String!
+    var plot: String!
+    var language: String!
+    var country: String!
+    var awards: String!
+    var poster: String!
+    var metascore: String!
+    var imdbRating: String!
+    var imdbVotes: String!
+    var imdbID: String!
+    var type: String!
     
-    required init?(_ map: Map) {
+    override init()
+    {
+        
+    }
+
+    required convenience init?(_ map: Map)
+    {
+        self.init()
         mapping(map)
     }
-    
+
     func mapping(map: Map) {
         
         title <- map["Title"]
@@ -59,4 +67,36 @@ class BookmarkMovie: Mappable {
         type <- map["Type"]
         
     }
+    
+}
+
+extension BookmarkMovie {
+    
+    class func bookmarkMovieWithResultSet(resultSet: FMResultSet) -> BookmarkMovie
+    {
+        let bookmarkMovie = BookmarkMovie()
+        
+        bookmarkMovie.title = resultSet.stringForColumn("title")
+        bookmarkMovie.year = resultSet.stringForColumn("year")
+        bookmarkMovie.country = resultSet.stringForColumn("country")
+        bookmarkMovie.poster = resultSet.stringForColumn("poster")
+        bookmarkMovie.rated = resultSet.stringForColumn("rated")
+        bookmarkMovie.released = resultSet.stringForColumn("released")
+        bookmarkMovie.runtime = resultSet.stringForColumn("runtime")
+        bookmarkMovie.genre = resultSet.stringForColumn("genre")
+        bookmarkMovie.director = resultSet.stringForColumn("director")
+        bookmarkMovie.plot = resultSet.stringForColumn("plot")
+        bookmarkMovie.writer = resultSet.stringForColumn("writer")
+        bookmarkMovie.actors = resultSet.stringForColumn("actors")
+        bookmarkMovie.language = resultSet.stringForColumn("language")
+        bookmarkMovie.awards = resultSet.stringForColumn("awards")
+        bookmarkMovie.metascore = resultSet.stringForColumn("metascore")
+        bookmarkMovie.imdbRating = resultSet.stringForColumn("imdbRating")
+        bookmarkMovie.imdbVotes = resultSet.stringForColumn("imdbVotes")
+        bookmarkMovie.imdbID = resultSet.stringForColumn("imdbID")
+        bookmarkMovie.type = resultSet.stringForColumn("type")
+        
+        return bookmarkMovie
+    }
+
 }

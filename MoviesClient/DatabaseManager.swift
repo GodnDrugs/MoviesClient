@@ -80,7 +80,7 @@ class DatabaseManager: NSObject {
                             let poster = movie.poster
                             let plot = movie.plot
                             let saveResultQuery = "INSERT INTO found_movies (title, year, country, poster, plot) VALUES (?, ?, ?, ?, ?)"
-                            let updateSuccessful = db.executeUpdate(saveResultQuery, withArgumentsInArray: [title, year, country, poster, plot])
+                            let updateSuccessful = db.executeUpdate(saveResultQuery, withArgumentsInArray: [title!, year!, country, poster, plot])
                             
                             if !updateSuccessful {
                                 print("Insert failure: \(db.lastErrorMessage())")
@@ -92,38 +92,104 @@ class DatabaseManager: NSObject {
                     print(error)
                 }
             }
-            
-//            let tableExist = self.db.tableExists("found_movies")
-//            if !tableExist {
-//                self.createTable()
-//            } else {
-//                self.dropTable()
-//                self.createTable()
-//            }
 
         })
 
     }
     
-    func getLastSearchResult(completion: [ResultFoundMovie] -> Void) -> Void
+    func loadPreviousSearchResult(completion: [FoundMovie] -> Void) -> Void
     {
-        var resultFoundMovieArray = Array<ResultFoundMovie>()
+        var foundMovieArray = Array<FoundMovie>()
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             self.queue.inDatabase({ (db) -> Void in
                 let rs = db.executeQuery("select * from found_movies", withArgumentsInArray: nil)
+                
+                if rs == nil {
+                    return
+                }
+                
                 while rs.next() {
-                    let resultFoundMovie = ResultFoundMovie.resultFoundMovieWithResultSet(rs)
-                    resultFoundMovieArray.append(resultFoundMovie)
+                    let resultFoundMovie = FoundMovie.foundMovieWithResultSet(rs)
+                    foundMovieArray.append(resultFoundMovie)
                 }
             })
-            completion(resultFoundMovieArray)
+            completion(foundMovieArray)
         })
     }
     
-    func addMovieToBookmarks() -> Void
+    func getMovieBookmarks(completion: [BookmarkMovie] -> Void) -> Void
     {
+        var bookmarkMovieArray = Array<BookmarkMovie>()
         
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            self.queue.inDatabase({ (db) -> Void in
+                let rs = db.executeQuery("select * from bookmarks", withArgumentsInArray: nil)
+                //нужна проверка если в закладках еще ничего и предуплеждение
+                while rs.next() {
+                    let bookmarkMovie = BookmarkMovie.bookmarkMovieWithResultSet(rs)
+                    bookmarkMovieArray.append(bookmarkMovie)
+                }
+            })
+            completion(bookmarkMovieArray)
+        })
+    }
+    
+    func addMovieToBookmarks(addToBookmarks movie: BookmarkMovie) -> Void
+    {
+        let title = movie.title
+        let year = movie.year
+        let rated = movie.rated
+        let released = movie.released
+        let runtime = movie.runtime
+        let genre = movie.genre
+        let director = movie.director
+        let writer = movie.writer
+        let actors = movie.actors
+        let plot = movie.plot
+        let language = movie.language
+        let country = movie.country
+        let awards = movie.awards
+        let poster = movie.poster
+        let metascore = movie.metascore
+        let imdbRating = movie.imdbRating
+        let imdbVotes = movie.imdbVotes
+        let imdbID = movie.imdbID
+        let type = movie.type
+        ///Сделать проверку, чтобы не было одинаковых записей
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            self.queue.inTransaction({ db, rollback -> Void in
+                do {
+                    try db.executeUpdate(createBookmarksTableQuery, values: nil)
+                    
+                    let addToBookmarksQuery = "INSERT INTO bookmarks (title, year, rated, released, runtime, genre, director, writer, actors, plot, language, country, awards, poster, metascore, imdbRating , imdbVotes, imdbID, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                    let updateSuccessful = db.executeUpdate(addToBookmarksQuery, withArgumentsInArray: [title!, year!, rated!, released!, runtime!, genre!, director!, writer!, actors!, plot!, language!, country!, awards!, poster!, metascore!, imdbRating!, imdbVotes!, imdbID!, type!])
+                    if !updateSuccessful {
+                        print("Insert failure: \(db.lastErrorMessage())")
+                    }
+                } catch {
+                    rollback.memory = true
+                    print(error)
+                }
+            })
+
+        })
+    }
+    
+    func deleteMoveFromBookmarks(titleMovieForRemove title: String) -> Void
+    {
+        let deleteMovieQuery = "DELETE FROM bookmarks WHERE title='\(title)'"
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            self.queue.inTransaction({ db, rollback -> Void in
+                do {
+                    try db.executeUpdate(deleteMovieQuery, values: nil)
+                } catch {
+                    rollback.memory = true
+                    print(error)
+                }
+            })
+        })
     }
     
 //    func createTable() -> Void

@@ -11,7 +11,7 @@ import ObjectMapper
 import FMDB
 
 
-class FoundMovie: Mappable {
+class FoundMovie: NSObject, Mappable {
     
     var id: String!
     var title: String!
@@ -20,12 +20,19 @@ class FoundMovie: Mappable {
     var poster: String!
     var plot: String!
     
-    required init?(_ map: Map)
+    override init()
     {
+        
+    }
+    
+    required convenience init?(_ map: Map)
+    {
+        self.init()
         mapping(map)
     }
 
-    func mapping(map: Map) {
+    func mapping(map: Map)
+    {
         
         self.id <- map["imdbID"]
         self.title <- map["Title"]
@@ -38,22 +45,22 @@ class FoundMovie: Mappable {
     
 }
 
-//extension FoundMovie {
-//    
-//    class func foundMovieWithResultSet(resultSet: FMResultSet) -> AnyObject
-//    {
-//        print(resultSet.stringForColumn("title"))
-//        let title = resultSet.stringForColumn("title")
-//        foundMovie.title = "sd"//resultSet.stringForColumn("title")
-//        foundMovie.year = resultSet.stringForColumn("year")
-//        foundMovie.country = resultSet.stringForColumn("country")
-//        foundMovie.poster = resultSet.stringForColumn("poster")
-//        foundMovie.plot = resultSet.stringForColumn("plot")
-//        
-//        return foundMovie
-//    }
-//    
-//}
+extension FoundMovie {
+    
+    class func foundMovieWithResultSet(resultSet: FMResultSet) -> FoundMovie
+    {
+        let foundMovie = FoundMovie()
+        
+        foundMovie.title = resultSet.stringForColumn("title")
+        foundMovie.year = resultSet.stringForColumn("year")
+        foundMovie.country = resultSet.stringForColumn("country")
+        foundMovie.poster = resultSet.stringForColumn("poster")
+        foundMovie.plot = resultSet.stringForColumn("plot")
+        
+        return foundMovie
+    }
+}
+
 
 
 

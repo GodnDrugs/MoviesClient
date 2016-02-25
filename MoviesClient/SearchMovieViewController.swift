@@ -12,6 +12,8 @@ import ObjectMapper
 import AFNetworking
 
 
+let selfIdentifier = "searchVC"
+
 class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, MovieFactoryDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -22,16 +24,11 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     var imdbIDArray = Array<AnyObject>()
     var movie: FoundMovie?
     var bookmarkMovie: BookmarkMovie?
-    var movieForDisplay = Array<AnyObject>()
+    var foundMovieArray = Array<FoundMovie>()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-//       DatabaseManager.sharedInstance.getLastSearchResult({ (resultFoundMovie) -> Void in
-//        self.movieForDisplay = resultFoundMovie
-//        self.tableView.reloadData()
-//       })
         
         MovieFactory.sharedInstance.delegate = self
         
@@ -50,20 +47,18 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.registerNib(SearchViewCell.nibSearchCell(), forCellReuseIdentifier: SearchViewCell.cellSearchReuseIdentifier())
     }
     
-//    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
-//        print("")
-//    }
-
-    
-//    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-//        if (viewController .isKindOfClass(BookmarksViewController)) {
-//            let bookmarkVC = self.tabBarController?.viewControllers![1] as? BookmarksViewController
-//            bookmarkVC?.bookmarksMovieArray = self.bookmarksMovieArray
-//            print("")
-//        }
-//        
-//        return true
-//    }
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        DatabaseManager.sharedInstance.loadPreviousSearchResult({ (previousSearchResultArray) -> Void in
+            if previousSearchResultArray.count == 0 {
+                return
+            }
+            self.foundMovieArray = previousSearchResultArray
+            self.tableView.reloadData()
+        })
+    }
     
     
 //    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -112,7 +107,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
             } else {
                 
                 MovieFactory.sharedInstance.collectorFoundMovie(searchString: searchText) { (foundMovieArray) -> Void in
-                    self.movieForDisplay = foundMovieArray
+                    self.foundMovieArray = foundMovieArray
                     self.tableView.reloadData()
                     DatabaseManager.sharedInstance.saveSearchResult(resultToSave: foundMovieArray)
                     
@@ -139,48 +134,25 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return self.movieForDisplay.count;
+        return self.foundMovieArray.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
-        let foundMovie = self.movieForDisplay[indexPath.row]
+        let foundMovie = self.foundMovieArray[indexPath.row]
+    
+        cell.titleMovieLabel.text = foundMovie.title
+        cell.movieDescriptionLabel.text = foundMovie.plot
+        cell.countryDataLabel.text = foundMovie.country+" - "+foundMovie.year
+        cell.imageMovie.setImageWithURL(NSURL(string: foundMovie.poster)!)
         
-        if foundMovie .isKindOfClass(ResultFoundMovie) {
-            
-//            let cellDisplayResultSearch = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
-
-            let movie = foundMovie as! ResultFoundMovie
-            
-            cell.titleMovieLabel.text = foundMovie.title
-            cell.movieDescriptionLabel.text = movie.plot
-            cell.countryDataLabel.text = movie.country!+" - "+movie.year!
-            cell.imageMovie.setImageWithURL(NSURL(string: movie.poster!)!)
-            
-//            cell = cellDisplayResultSearch
-            
-        } else {
-            
-//            let cellDisplayFoundMovie = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
-            
-            let movie = foundMovie as! FoundMovie
-            
-            cell.titleMovieLabel.text = movie.title
-            cell.movieDescriptionLabel.text = movie.plot
-            cell.countryDataLabel.text = movie.country!+" - "+movie.year!
-            cell.imageMovie.setImageWithURL(NSURL(string: movie.poster!)!)
-            print("")
-            
-//            cell = cellDisplayFoundMovie
-        }
-
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let foundMovie = self.movieForDisplay[indexPath.row] as! FoundMovie
+        let foundMovie = self.foundMovieArray[indexPath.row]
         let movieID = foundMovie.id
         
         MovieFactory.sharedInstance.collectorBookmarkMovie(bookmarkMovieID: movieID!) { (bookmarkMovie) -> Void in
@@ -191,11 +163,13 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
         if (segue.identifier == "toDetailMovieVC") {
             var vc = DetailMovieViewController()
             vc = segue.destinationViewController as! DetailMovieViewController
             vc.bookmarkMovie = self.bookmarkMovie
+            vc.checkViewController = selfIdentifier
         }
     }
     

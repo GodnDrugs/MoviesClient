@@ -9,6 +9,9 @@
             <objects>
                 <viewController storyboardIdentifier="BookmarkVC" id="g7g-ce-jQf" customClass="BookmarksViewController" customModule="MoviesClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="bookmarks" id="tJZ-zP-FWt"/>
+                    <connections>
+                        <segue destination="eui-SF-bNJ" kind="show" identifier="toDetailMovieVC" id="zoX-Gf-cVb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VjG-6C-OAU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -20,14 +23,18 @@
                 <viewController storyboardIdentifier="DetailMovieVC" id="eui-SF-bNJ" customClass="DetailMovieViewController" customModule="MoviesClient" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Title" id="sfU-at-TkC">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="yte-aI-7xT"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="yte-aI-7xT">
+                            <connections>
+                                <action selector="showActionSheet:" destination="eui-SF-bNJ" id="fvG-2D-Ta1"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YOJ-7N-KcP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="33" y="-75"/>
+            <point key="canvasLocation" x="149" y="-75"/>
         </scene>
         <!--Search Movie View Controller-->
         <scene sceneID="yFI-Ga-OMc">
@@ -50,7 +57,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1sr-S5-ijg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="33" y="461"/>
+            <point key="canvasLocation" x="276" y="422"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="L4n-hs-jPM">
@@ -92,4 +99,7 @@
             <point key="canvasLocation" x="-1222" y="200"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="zoX-Gf-cVb"/>
+    </inferredMetricsTieBreakers>
 </document>

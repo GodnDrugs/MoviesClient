@@ -13,10 +13,17 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableView: UITableView!
     
     var bookmarksMovieArray = Array<BookmarkMovie>()
-
+    var bookmarkMovie: BookmarkMovie? = nil
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+//        DatabaseManager.sharedInstance.getMovieBookmarks { (bookmarkMovieArray) -> Void in
+//            self.bookmarksMovieArray = bookmarkMovieArray
+//            self.tableView.reloadData()
+//            print("")
+//        }
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -25,6 +32,31 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
 
         tableView.registerNib(BookmarkMovieViewCell.nibBookmarkCell(), forCellReuseIdentifier: BookmarkMovieViewCell.cellBookmarkReuseIdentifier())
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        DatabaseManager.sharedInstance.getMovieBookmarks { (bookmarkMovieArray) -> Void in
+            self.bookmarksMovieArray = bookmarkMovieArray
+            self.tableView.reloadData()
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if (segue.identifier == "toDetailMovieVC") {
+            var vc = DetailMovieViewController()
+            vc = segue.destinationViewController as! DetailMovieViewController
+            vc.bookmarkMovie = self.bookmarkMovie
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        self.bookmarkMovie = self.bookmarksMovieArray[indexPath.row]
+        self.performSegueWithIdentifier("toDetailMovieVC", sender: self)
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -36,21 +68,16 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     {
         return UITableViewAutomaticDimension
     }
-    
-//    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
-//    {
-//        return UITableViewAutomaticDimension
-//    }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier(BookmarkMovieViewCell.cellBookmarkReuseIdentifier()) as! BookmarkMovieViewCell
         
         let bookmarkMovie = self.bookmarksMovieArray[indexPath.row]
-//        let testString = "Такой код как ни странно выведет в консоль 100 вместо 30. Ладно, здесь мы видим, что создан был все таки квадрат, а затем использован в качестве прямоугольника. А если использование объекта класса Rectangle будет совсем не в том месте, где объект был создан? Скажем, пропущенный через несколько вызовов нескольких классов?"
-        cell.titleLabel.text = bookmarkMovie.title
         var timeGenreYearCountry = bookmarkMovie.runtime!+" - "+bookmarkMovie.genre!
         timeGenreYearCountry += " - "+bookmarkMovie.year!+" - "+bookmarkMovie.country!
+        
+        cell.titleLabel.text = bookmarkMovie.title
         cell.timeGenreYearCountryLabel.text = timeGenreYearCountry
         cell.directorLabel.text = "Director: "+bookmarkMovie.director!
         cell.ratingLabel.text = "Rating: "+bookmarkMovie.imdbRating!

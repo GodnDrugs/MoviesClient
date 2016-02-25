@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import Social
+
+
+let searchIdentifierVC = "searchVC"
+let bookmarkIdentifierVC = "bookmarkVC"
 
 class DetailMovieViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    var bookmarkMovie: BookmarkMovie?
     
+    var checkViewController = String()
+    var bookmarkMovie: BookmarkMovie?
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -25,6 +32,7 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         self.tableView.registerNib(DetailMovieCell.nibCell(), forCellReuseIdentifier: DetailMovieCell.cellReuseIdentifier())
+        self.title = bookmarkMovie?.title
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -53,6 +61,68 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         cell.posterImage.setImageWithURL(NSURL(string: (self.bookmarkMovie?.poster)!)!)
         
         return cell
+    }
+
+    @IBAction func showActionSheet(sender: AnyObject)
+    {
+        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .ActionSheet)
+        
+        let shareToTwitter = UIAlertAction(title: "Twitter share", style: .Default) {
+            (alert: UIAlertAction!) -> Void in
+            let shareToTwitter : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            self.presentViewController(shareToTwitter, animated: true, completion: nil)
+        }
+        
+        let shareToFacebook = UIAlertAction(title: "Facebook share", style: .Default) {
+            (alert: UIAlertAction!) -> Void in
+            let shareToTwitter : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            self.presentViewController(shareToTwitter, animated: true, completion: nil)
+        }
+        
+        let emailAction = UIAlertAction(title: "Email share", style: .Default) {
+            (alert: UIAlertAction!) -> Void in
+            //Code
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {
+            (alert: UIAlertAction!) -> Void in
+            //Code
+        }
+        
+        optionMenu.addAction(shareToTwitter)
+        optionMenu.addAction(shareToFacebook)
+        optionMenu.addAction(emailAction)
+        optionMenu.addAction(cancelAction)
+        
+        if checkViewController == searchIdentifierVC {
+            optionMenu.addAction(self.addToBookmarksAlert())
+        } else {
+            optionMenu.addAction(self.deleteFromBookmarksAlert())
+        }
+
+        self.presentViewController(optionMenu, animated: true, completion: nil)
+        
+    }
+    
+    func addToBookmarksAlert() -> UIAlertAction
+    {
+        let addBookmarkAction = UIAlertAction(title: "Add to Bookmarks", style: .Default) {
+            (alert: UIAlertAction!) -> Void in
+            print("")
+            DatabaseManager.sharedInstance.addMovieToBookmarks(addToBookmarks: self.bookmarkMovie!)
+        }
+        
+        return addBookmarkAction
+    }
+    
+    func deleteFromBookmarksAlert() -> UIAlertAction
+    {
+        let removeBookmarkAction = UIAlertAction(title: "Remove from Bookmarks", style: .Default) {
+            (alert: UIAlertAction!) -> Void in
+            DatabaseManager.sharedInstance.deleteMoveFromBookmarks(titleMovieForRemove: (self.bookmarkMovie?.title)!)
+        }
+        
+        return removeBookmarkAction
     }
     
 

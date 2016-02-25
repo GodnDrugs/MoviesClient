@@ -25,22 +25,12 @@ class DetailMovieCell: UITableViewCell {
     override func awakeFromNib()
     {
         super.awakeFromNib()
-        // Initialization code
         
         self.cardView.layer.borderWidth = 2.0
         self.cardView.layer.borderColor = UIColor.grayColor().CGColor
-        self.headerContainerView.autoresizingMask = .FlexibleHeight
-        self.headerContainerView.sizeToFit()
-        self.titleLabel.sizeToFit()
+        self.selectionStyle = UITableViewCellSelectionStyle.None
     }
 
-    override func setSelected(selected: Bool, animated: Bool)
-    {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
     class func nibCell() -> UINib
     {
         let nib = UINib(nibName: "DetailMovieCell", bundle: nil)

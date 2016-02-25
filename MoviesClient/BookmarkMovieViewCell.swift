@@ -28,18 +28,10 @@ class BookmarkMovieViewCell: UITableViewCell {
         self.cardView.layer.borderWidth = 1.0
         self.cardView.layer.borderColor = UIColor.grayColor().CGColor
     }
-
-    override func setSelected(selected: Bool, animated: Bool)
-    {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
     
     class func nibBookmarkCell() -> UINib
     {
         let nib = UINib(nibName: "BookmarkMovieViewCell", bundle: nil)
-        
         return nib
     }
     

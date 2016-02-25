@@ -16,15 +16,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oct-rd-nMk">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
             <constraints>
-                <constraint firstItem="oct-rd-nMk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1Jh-E2-ony"/>
-                <constraint firstAttribute="trailing" secondItem="oct-rd-nMk" secondAttribute="trailing" id="I8o-1L-lBt"/>
-                <constraint firstItem="oct-rd-nMk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OYc-lg-ep5"/>
-                <constraint firstAttribute="bottom" secondItem="oct-rd-nMk" secondAttribute="bottom" id="vhv-M4-Ss6"/>
+                <constraint firstAttribute="bottom" secondItem="oct-rd-nMk" secondAttribute="bottom" constant="49" id="GR6-vN-Y5P"/>
+                <constraint firstItem="oct-rd-nMk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Rsv-6o-C47"/>
+                <constraint firstItem="oct-rd-nMk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SmM-9c-sO3"/>
+                <constraint firstAttribute="trailing" secondItem="oct-rd-nMk" secondAttribute="trailing" id="wx7-kO-yBm"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="37" y="129"/>

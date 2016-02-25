@@ -34,7 +34,6 @@ class SearchViewCell: UITableViewCell {
     class func nibSearchCell() -> UINib
     {
         let nib = UINib(nibName: "SearchViewCell", bundle: nil)
-        
         return nib
     }
     
