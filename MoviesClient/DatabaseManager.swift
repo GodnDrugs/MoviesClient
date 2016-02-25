@@ -126,7 +126,11 @@ class DatabaseManager: NSObject {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             self.queue.inDatabase({ (db) -> Void in
                 let rs = db.executeQuery("select * from bookmarks", withArgumentsInArray: nil)
-                //нужна проверка если в закладках еще ничего и предуплеждение
+
+                if rs == nil {
+                    return
+                }
+                
                 while rs.next() {
                     let bookmarkMovie = BookmarkMovie.bookmarkMovieWithResultSet(rs)
                     bookmarkMovieArray.append(bookmarkMovie)

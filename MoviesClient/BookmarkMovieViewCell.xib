@@ -58,7 +58,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MPG-8l-WgK">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bookmarks" translatesAutoresizingMaskIntoConstraints="NO" id="MPG-8l-WgK">
                                 <rect key="frame" x="323" y="0.0" width="32" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="7km-Gk-BnC"/>
@@ -123,10 +123,11 @@
                 <outlet property="typeLabel" destination="ZsF-8T-S49" id="Zn2-wO-bDV"/>
                 <outlet property="writersLabel" destination="hID-3v-aCP" id="b5G-i5-BWA"/>
             </connections>
-            <point key="canvasLocation" x="-34.5" y="18.5"/>
+            <point key="canvasLocation" x="-143.5" y="-14.5"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="bookmarks" width="256" height="256"/>
         <image name="scientific15" width="660" height="990"/>
     </resources>
 </document>
