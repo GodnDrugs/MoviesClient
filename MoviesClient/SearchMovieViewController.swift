@@ -116,7 +116,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         cell.titleMovieLabel.text = foundMovie.title
         cell.movieDescriptionLabel.text = foundMovie.plot
         cell.countryDataLabel.text = foundMovie.country+" - "+foundMovie.year
-        cell.imageMovie.setImageWithURL(NSURL(string: foundMovie.poster)!)
+        cell.imageMovie.setImageWithURL(NSURL(string: foundMovie.poster)!, placeholderImage: UIImage(named: "scientific15"))
         
         return cell
     }

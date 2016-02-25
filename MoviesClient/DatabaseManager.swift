@@ -11,7 +11,7 @@ import Foundation
 import FMDB
 
 let kDatabaseName = "movieclient.sqlite"
-let createFoundMovieTableQuery = "CREATE  TABLE  IF NOT EXISTS found_movies (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, imdbID VARCHAR NOT NULL, title VARCHAR NOT NULL, year VARCHAR NOT NULL , country VARCHAR NOT NULL , poster VARCHAR NOT NULL , plot VARCHAR NOT NULL)"
+let createFoundMovieTableQuery = "CREATE  TABLE  IF NOT EXISTS found_movies (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, imdbID VARCHAR NOT NULL, title VARCHAR NOT NULL, year VARCHAR NOT NULL , country VARCHAR NOT NULL , poster TEXT NOT NULL , plot VARCHAR NOT NULL)"
 let dropFoundMovieTableQuery = "DROP TABLE found_movies"
 let createBookmarksTableQuery = "CREATE  TABLE  IF NOT EXISTS bookmarks (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, title VARCHAR NOT NULL , year VARCHAR NOT NULL , rated VARCHAR NOT NULL, released VARCHAR NOT NULL, runtime VARCHAR NOT NULL, genre VARCHAR NOT NULL, director VARCHAR NOT NULL, writer VARCHAR NOT NULL, actors VARCHAR NOT NULL, plot VARCHAR NOT NULL, language VARCHAR NOT NULL, country VARCHAR NOT NULL, awards VARCHAR NOT NULL , poster VARCHAR NOT NULL , metascore VARCHAR NOT NULL, imdbRating VARCHAR NOT NULL, imdbVotes VARCHAR NOT NULL, imdbID VARCHAR NOT NULL, type VARCHAR NOT NULL)"
 
