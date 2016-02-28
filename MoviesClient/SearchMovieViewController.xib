@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchMovieViewController" customModule="MoviesClient" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner">
             <connections>
                 <outlet property="searchBar" destination="IXy-Gh-2Z4" id="APW-wF-JxQ"/>
                 <outlet property="tableView" destination="3C7-R5-mW3" id="u74-Gn-k6e"/>
@@ -16,24 +16,24 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="IXy-Gh-2Z4">
-                    <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3C7-R5-mW3">
-                    <rect key="frame" x="0.0" y="108" width="320" height="323"/>
+                    <rect key="frame" x="0.0" y="68" width="320" height="412"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="IXy-Gh-2Z4">
+                    <rect key="frame" x="0.0" y="24" width="320" height="44"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="IXy-Gh-2Z4" firstAttribute="leading" secondItem="i9y-ke-Mss" secondAttribute="leading" id="DI5-bo-0os"/>
-                <constraint firstItem="3C7-R5-mW3" firstAttribute="leading" secondItem="i9y-ke-Mss" secondAttribute="leading" id="OB3-6d-liL"/>
-                <constraint firstItem="IXy-Gh-2Z4" firstAttribute="top" secondItem="i9y-ke-Mss" secondAttribute="top" constant="64" id="Ojd-aj-eRv"/>
-                <constraint firstItem="3C7-R5-mW3" firstAttribute="top" secondItem="IXy-Gh-2Z4" secondAttribute="bottom" id="kZG-an-zTe"/>
-                <constraint firstAttribute="trailing" secondItem="3C7-R5-mW3" secondAttribute="trailing" id="pvr-oE-26Y"/>
-                <constraint firstAttribute="trailing" secondItem="IXy-Gh-2Z4" secondAttribute="trailing" id="v7v-Ta-Rj0"/>
-                <constraint firstAttribute="bottom" secondItem="3C7-R5-mW3" secondAttribute="bottom" constant="49" id="vUP-vU-oaZ"/>
+                <constraint firstAttribute="bottom" secondItem="3C7-R5-mW3" secondAttribute="bottom" id="EYQ-f3-zrH"/>
+                <constraint firstItem="IXy-Gh-2Z4" firstAttribute="top" secondItem="i9y-ke-Mss" secondAttribute="top" constant="24" id="HN5-Ff-pMb"/>
+                <constraint firstAttribute="trailing" secondItem="IXy-Gh-2Z4" secondAttribute="trailing" id="MaC-YI-Ryl"/>
+                <constraint firstItem="3C7-R5-mW3" firstAttribute="top" secondItem="IXy-Gh-2Z4" secondAttribute="bottom" id="MdS-C3-X3N"/>
+                <constraint firstAttribute="trailing" secondItem="3C7-R5-mW3" secondAttribute="trailing" id="QRw-GY-fLj"/>
+                <constraint firstItem="IXy-Gh-2Z4" firstAttribute="leading" secondItem="i9y-ke-Mss" secondAttribute="leading" id="me6-pB-ZiV"/>
+                <constraint firstItem="3C7-R5-mW3" firstAttribute="leading" secondItem="i9y-ke-Mss" secondAttribute="leading" id="wez-dx-FhG"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="321" y="-652"/>

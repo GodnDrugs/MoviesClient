@@ -17,6 +17,7 @@ let bookmarkIdentifierVC = "bookmarkVC"
 class DetailMovieViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var detailNavigationBar: UINavigationBar!
     
     var checkViewController = String()
     var bookmarkMovie: BookmarkMovie?
@@ -25,9 +26,11 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
     {
         super.viewDidLoad()
         
+        self.detailNavigationBar.topItem?.title = self.bookmarkMovie?.title
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
+
         self.tableView.estimatedRowHeight = 200
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -67,6 +70,13 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         cell.posterImage.setImageWithURL(NSURL(string: (self.bookmarkMovie?.poster)!)!)
         
         return cell
+    }
+    @IBAction func backButton(sender: AnyObject)
+    {
+        self.dismissViewControllerAnimated(true) { () -> Void in
+            
+        }
+//        self.navigationController?.popViewControllerAnimated(true)
     }
 
     @IBAction func showActionSheet(sender: AnyObject)

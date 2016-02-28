@@ -123,7 +123,7 @@
                 <outlet property="typeLabel" destination="ZsF-8T-S49" id="Zn2-wO-bDV"/>
                 <outlet property="writersLabel" destination="hID-3v-aCP" id="b5G-i5-BWA"/>
             </connections>
-            <point key="canvasLocation" x="-143.5" y="-14.5"/>
+            <point key="canvasLocation" x="-21.5" y="-88.5"/>
         </tableViewCell>
     </objects>
     <resources>

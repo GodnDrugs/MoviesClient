@@ -13,7 +13,7 @@ import ObjectMapper
 
 protocol MovieFactoryDelegate
 {
-    func showSearchError(movieTitle title: String)
+    func responseFalseNotification()
 }
 
 class MovieFactory: NSObject {
@@ -34,21 +34,21 @@ class MovieFactory: NSObject {
 
     func collectorFoundMovie(searchString text: String, completion: [FoundMovie] -> Void) -> Void
     {
-        var imdbIDArray = Array<String>()
-        var foundMovieArray = Array<FoundMovie>()
+        var imdbIDArray = [String]()
+        var foundMovieArray = [FoundMovie]()
         let downloadGroup = dispatch_group_create()
         
         let urlForSearchByTitle = self.createUrlForSearchByTitle(movieTitle: text)
         Alamofire.request(.GET, urlForSearchByTitle, parameters: ["foo": "bar"])
             .responseJSON { response in
-                
+                print("")
                 if let JSON = response.result.value {
                     
                     let dictionaryJSON = JSON as! NSDictionary
                     let response = dictionaryJSON.valueForKeyPath("Response") as! String
                     
                     if (response == "False") {
-//                        self.delegate?.showSearchError(movieTitle: text)
+                        self.delegate?.responseFalseNotification()
                         return
                     }
                     
@@ -108,8 +108,20 @@ class MovieFactory: NSObject {
     
     func createUrlForSearchByTitle(movieTitle title: String) -> String
     {
-        let resultURL = "http://www.omdbapi.com/?s=\(title)"
-        return resultURL
+        let stringWithExcessWhitespace = "http://www.omdbapi.com/?s=\(title)"
+        var urlForRequest = removeExcessiveSpaces(stringWithExcessWhitespace: stringWithExcessWhitespace)
+        urlForRequest = urlForRequest.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        
+        return urlForRequest
+    }
+    
+    func removeExcessiveSpaces(stringWithExcessWhitespace string: String) -> String
+    {
+        let components = string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        let filtered = components.filter({!$0.isEmpty})
+        
+        return filtered.joinWithSeparator("+")
     }
     
 }//End Class
+

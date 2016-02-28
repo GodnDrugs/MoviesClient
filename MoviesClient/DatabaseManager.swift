@@ -40,13 +40,22 @@ class DatabaseManager: NSObject {
         
         let databasePathString = databasePathUrl.path
         
+//        if !(NSFileManager().fileExistsAtPath(databasePathString!)) {
+//            let deviceDatabasePath = NSBundle.mainBundle().resourcePath?.stringByAppendingPathComponent(kDatabaseName)
+//            do {
+//                try NSFileManager().copyItemAtPath(deviceDatabasePath!, toPath: databasePathString!)
+//            } catch let error as NSError {
+//                print("Error copy Database resourse to documents: \(error)")
+//            }
+//        }
+        
         self.queue = FMDatabaseQueue(path: databasePathString)
     }
     
     func saveSearchResult(resultToSave result: [FoundMovie]) -> Void
     {
         //            SELECT count(*) FROM sqlite_master WHERE type='table' AND name='found_movies';
-//        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+//        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) dispatch_get_main_queue()
         dispatch_async(dispatch_get_main_queue(), {
             self.queue.inTransaction { db, rollback in
                 do {
@@ -86,7 +95,7 @@ class DatabaseManager: NSObject {
     {
         var foundMovieArray = Array<FoundMovie>()
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+        dispatch_async(dispatch_get_main_queue(), {
             self.queue.inDatabase({ (db) -> Void in
                 let rs = db.executeQuery("select * from found_movies", withArgumentsInArray: nil)
                 

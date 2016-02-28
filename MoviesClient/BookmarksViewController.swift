@@ -11,27 +11,30 @@ import UIKit
 class BookmarksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var bookmarkNavigationBar: UINavigationBar!
     
-    var bookmarksMovieArray = Array<BookmarkMovie>()
+    var bookmarksMovieArray = [BookmarkMovie]()
     var bookmarkMovie: BookmarkMovie? = nil
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        self.bookmarkNavigationBar.topItem?.title = "Bookmarked"
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 200
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-
+    
         tableView.registerNib(BookmarkMovieViewCell.nibBookmarkCell(), forCellReuseIdentifier: BookmarkMovieViewCell.cellBookmarkReuseIdentifier())
     }
     
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        
+
         DatabaseManager.sharedInstance.getMovieBookmarks { (bookmarkMovieArray) -> Void in
             self.bookmarksMovieArray = bookmarkMovieArray
             self.tableView.reloadData()
