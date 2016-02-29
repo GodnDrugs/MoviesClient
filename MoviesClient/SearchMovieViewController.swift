@@ -20,12 +20,15 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     
     var notFoundMovieFlag: Bool = false
-    var searchActive : Bool = false
+    var searchActive: Bool = false
     var imdbIDArray = [AnyObject]()
     var movie: FoundMovie?
-    var bookmarkMovie: BookmarkMovie?
+    var bookmarkMovieToDetail: BookmarkMovie?
+    var foundMovieToDetail: FoundMovie?
     var foundMovieArray = [FoundMovie]()
     var notFoundMovieTitle = String()
+    
+    var onceToken: dispatch_once_t = 0
     
     override func viewDidLoad()
     {
@@ -51,18 +54,23 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.registerNib(NotFoundViewCell.nibCell(), forCellReuseIdentifier: NotFoundViewCell.cellReuseIdentifier())
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "GeneralCell")
     }
-    
+
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
         
-        DatabaseManager.sharedInstance.loadPreviousSearchResult({ (previousSearchResultArray) -> Void in
-            if previousSearchResultArray.count == 0 {
-                return
-            }
-            self.foundMovieArray = previousSearchResultArray
-            self.tableView.reloadData()
-        })
+        self.tableView.reloadData()
+        
+        dispatch_once(&onceToken) { () -> Void in
+            DatabaseManager.sharedInstance.loadPreviousSearchResult({ (previousSearchResultArray) -> Void in
+                if previousSearchResultArray.count == 0 {
+                    return
+                }
+                self.foundMovieArray = previousSearchResultArray
+                self.tableView.reloadData()
+            })
+        }
+
     }
 
 // MARK: - UISearchBar -
@@ -87,7 +95,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         self.notFoundMovieTitle = searchText
     
         
-        if (searchText.characters.count == 1 || searchText.characters.count == 0) { /* I love fuck animal! */ } else {
+        if (searchText.characters.count == 1 || searchText.characters.count == 0) { /* I love C */ } else {
             
             let regexExpression = ".*[^A-Za-z0-9].*"
             let predicat = NSPredicate(format:"SELF MATCHES %@", regexExpression)
@@ -158,6 +166,12 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
             
             let foundMovie = self.foundMovieArray[indexPath.row]
             
+            if foundMovie.isBookmarked {
+                cellMovie.bookmarkImageView.image = UIImage(named: "bookmarks")
+            } else {
+                cellMovie.bookmarkImageView.image = nil
+            }
+            
             cellMovie.titleMovieLabel.text = foundMovie.title
             cellMovie.movieDescriptionLabel.text = foundMovie.plot
             cellMovie.countryDataLabel.text = foundMovie.country+" - "+foundMovie.year
@@ -176,10 +190,11 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         let foundMovie = self.foundMovieArray[indexPath.row]
+        self.foundMovieToDetail = self.foundMovieArray[indexPath.row]
         let movieID = foundMovie.imdbID
         
         MovieFactory.sharedInstance.collectorBookmarkMovie(bookmarkMovieID: movieID!) { (bookmarkMovie) -> Void in
-            self.bookmarkMovie = bookmarkMovie
+            self.bookmarkMovieToDetail = bookmarkMovie
             self.performSegueWithIdentifier("toDetailMovieVC", sender: self)
         }
         
@@ -190,7 +205,8 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         if (segue.identifier == "toDetailMovieVC") {
             var vc = DetailMovieViewController()
             vc = segue.destinationViewController as! DetailMovieViewController
-            vc.bookmarkMovie = self.bookmarkMovie
+            vc.bookmarkMovie = self.bookmarkMovieToDetail
+            vc.foundMovie = self.foundMovieToDetail
             vc.checkViewController = selfIdentifier
         }
     }
@@ -199,6 +215,11 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     {
         self.notFoundMovieFlag = true
         self.tableView.reloadData()
+    }
+    
+    override func prefersStatusBarHidden() -> Bool
+    {
+        return false
     }
 
 }

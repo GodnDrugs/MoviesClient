@@ -18,7 +18,7 @@ protocol MovieFactoryDelegate
 
 class MovieFactory: NSObject {
     
-    var delegate:MovieFactoryDelegate? = nil
+    var delegate: MovieFactoryDelegate? = nil
     
     class var sharedInstance: MovieFactory {
         struct Static {

@@ -21,6 +21,7 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
     
     var checkViewController = String()
     var bookmarkMovie: BookmarkMovie?
+    var foundMovie: FoundMovie?
 
     override func viewDidLoad()
     {
@@ -54,6 +55,11 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         let cell = tableView.dequeueReusableCellWithIdentifier(DetailMovieCell.cellReuseIdentifier()) as! DetailMovieCell
         
         if checkViewController == searchIdentifierVC {
+            if ((self.foundMovie?.isBookmarked) != true) {
+                cell.bookmarkImage.image = nil
+            } else {
+                cell.bookmarkImage.image = UIImage(named: "bookmarks")
+            }
         } else {
             cell.bookmarkImage.image = UIImage(named: "bookmarks")
         }
@@ -111,7 +117,11 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         optionMenu.addAction(cancelAction)
         
         if checkViewController == searchIdentifierVC {
-            optionMenu.addAction(self.addToBookmarksAlert())
+            if ((self.foundMovie?.isBookmarked) == true) {
+                optionMenu.addAction(self.deleteFromBookmarksAlert())
+            } else {
+                optionMenu.addAction(self.addToBookmarksAlert())
+            }
         } else {
             optionMenu.addAction(self.deleteFromBookmarksAlert())
         }
@@ -153,6 +163,8 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
             (alert: UIAlertAction!) -> Void in
             print("")
             DatabaseManager.sharedInstance.addMovieToBookmarks(addToBookmarks: self.bookmarkMovie!)
+            self.foundMovie?.isBookmarked = true
+            self.tableView.reloadData()
         }
         
         return addBookmarkAction
@@ -163,10 +175,16 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         let removeBookmarkAction = UIAlertAction(title: "Remove from Bookmarks", style: .Default) {
             (alert: UIAlertAction!) -> Void in
             DatabaseManager.sharedInstance.deleteMoveFromBookmarks(titleMovieForRemove: (self.bookmarkMovie?.title)!)
+            self.foundMovie?.isBookmarked = false
+            self.tableView.reloadData()
         }
-        
+
         return removeBookmarkAction
     }
     
+    override func prefersStatusBarHidden() -> Bool
+    {
+        return false
+    }
 
 }/* End Class */

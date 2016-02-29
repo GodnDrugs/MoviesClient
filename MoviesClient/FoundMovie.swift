@@ -20,6 +20,8 @@ class FoundMovie: NSObject, Mappable {
     var poster: String!
     var plot: String!
     
+    var isBookmarked: Bool = false
+    
     override init()
     {
         

@@ -28,7 +28,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.estimatedRowHeight = 200
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     
-        tableView.registerNib(BookmarkMovieViewCell.nibBookmarkCell(), forCellReuseIdentifier: BookmarkMovieViewCell.cellBookmarkReuseIdentifier())
+        tableView.registerNib(SearchViewCell.nibSearchCell(), forCellReuseIdentifier: SearchViewCell.cellSearchReuseIdentifier())
     }
     
     override func viewWillAppear(animated: Bool)
@@ -68,22 +68,33 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(BookmarkMovieViewCell.cellBookmarkReuseIdentifier()) as! BookmarkMovieViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
         
         let bookmarkMovie = self.bookmarksMovieArray[indexPath.row]
         var timeGenreYearCountry = bookmarkMovie.runtime!+" - "+bookmarkMovie.genre!
         timeGenreYearCountry += " - "+bookmarkMovie.year!+" - "+bookmarkMovie.country!
+//        
+//        cell.titleLabel.text = bookmarkMovie.title
+//        cell.timeGenreYearCountryLabel.text = timeGenreYearCountry
+//        cell.directorLabel.text = "Director: "+bookmarkMovie.director!
+//        cell.ratingLabel.text = "Rating: "+bookmarkMovie.imdbRating!
+//        cell.writersLabel.text = "Director: "+bookmarkMovie.writer!
+//        cell.typeLabel.text = "Type: "+bookmarkMovie.type!
+//        cell.posterImage.setImageWithURL(NSURL(string: bookmarkMovie.poster)!)
+//        cell.descriptionLabel.text = "Short description: "+bookmarkMovie.plot!
         
-        cell.titleLabel.text = bookmarkMovie.title
-        cell.timeGenreYearCountryLabel.text = timeGenreYearCountry
-        cell.directorLabel.text = "Director: "+bookmarkMovie.director!
-        cell.ratingLabel.text = "Rating: "+bookmarkMovie.imdbRating!
-        cell.writersLabel.text = "Director: "+bookmarkMovie.writer!
-        cell.typeLabel.text = "Type: "+bookmarkMovie.type!
-        cell.posterImage.setImageWithURL(NSURL(string: bookmarkMovie.poster)!)
-        cell.descriptionLabel.text = "Short description: "+bookmarkMovie.plot!
+        cell.titleMovieLabel.text = bookmarkMovie.title
+        cell.movieDescriptionLabel.text = bookmarkMovie.plot
+        cell.countryDataLabel.text = timeGenreYearCountry
+        cell.imageMovie.setImageWithURL(NSURL(string: bookmarkMovie.poster)!, placeholderImage: UIImage(named: "scientific15"))
+
 
         return cell
+    }
+    
+    override func prefersStatusBarHidden() -> Bool
+    {
+        return false
     }
 
 }

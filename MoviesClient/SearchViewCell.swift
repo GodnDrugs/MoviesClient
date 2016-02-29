@@ -16,6 +16,10 @@ class SearchViewCell: UITableViewCell {
     @IBOutlet weak var movieDescriptionLabel: UILabel!
     @IBOutlet weak var imageMovie: UIImageView!
     @IBOutlet weak var cardView: UIView!
+    @IBOutlet weak var bookmarkImageView: UIImageView!
+    
+    
+    var isBookmarked: Bool = false
     
     override func awakeFromNib()
     {

@@ -33,6 +33,8 @@ class BookmarkMovie: NSObject, Mappable {
     var imdbID: String!
     var type: String!
     
+    var isBookmarked: Bool = false
+    
     override init()
     {
         

@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate/*, SplashScreenViewControl
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
         
 
 //        let filter = string.stringByReplacingOccurrencesOfString(" ", withString: "+")
@@ -33,6 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate/*, SplashScreenViewControl
 //        self.window!.makeKeyAndVisible()
         return true
     }
+    
+    
     
 //    func condenseWhitespace(string: String) -> String {
 //        let components = string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
