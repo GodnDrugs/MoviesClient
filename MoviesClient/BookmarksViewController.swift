@@ -8,6 +8,9 @@
 
 import UIKit
 
+import AlamofireImage
+
+
 class BookmarksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
@@ -15,6 +18,8 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var bookmarksMovieArray = [BookmarkMovie]()
     var bookmarkMovie: BookmarkMovie? = nil
+    
+    var itemHeights = [CGFloat](count: 1000, repeatedValue: UITableViewAutomaticDimension)
     
     override func viewDidLoad()
     {
@@ -25,7 +30,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 200
+        self.tableView.estimatedRowHeight = 100
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     
         tableView.registerNib(SearchViewCell.nibSearchCell(), forCellReuseIdentifier: SearchViewCell.cellSearchReuseIdentifier())
@@ -34,6 +39,8 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        
+        self.tableView.reloadData()
 
         DatabaseManager.sharedInstance.getMovieBookmarks { (bookmarkMovieArray) -> Void in
             self.bookmarksMovieArray = bookmarkMovieArray
@@ -49,6 +56,8 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
             vc.bookmarkMovie = self.bookmarkMovie
         }
     }
+    
+// MARK: - UITableView -
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
@@ -66,28 +75,31 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         return UITableViewAutomaticDimension
     }
 
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if itemHeights[indexPath.row] == UITableViewAutomaticDimension {
+            itemHeights[indexPath.row] = cell.bounds.height
+        }
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        return itemHeights[indexPath.row]
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
-        
         let bookmarkMovie = self.bookmarksMovieArray[indexPath.row]
         var timeGenreYearCountry = bookmarkMovie.runtime!+" - "+bookmarkMovie.genre!
         timeGenreYearCountry += " - "+bookmarkMovie.year!+" - "+bookmarkMovie.country!
-//        
-//        cell.titleLabel.text = bookmarkMovie.title
-//        cell.timeGenreYearCountryLabel.text = timeGenreYearCountry
-//        cell.directorLabel.text = "Director: "+bookmarkMovie.director!
-//        cell.ratingLabel.text = "Rating: "+bookmarkMovie.imdbRating!
-//        cell.writersLabel.text = "Director: "+bookmarkMovie.writer!
-//        cell.typeLabel.text = "Type: "+bookmarkMovie.type!
-//        cell.posterImage.setImageWithURL(NSURL(string: bookmarkMovie.poster)!)
-//        cell.descriptionLabel.text = "Short description: "+bookmarkMovie.plot!
         
         cell.titleMovieLabel.text = bookmarkMovie.title
         cell.movieDescriptionLabel.text = bookmarkMovie.plot
         cell.countryDataLabel.text = timeGenreYearCountry
-        cell.imageMovie.setImageWithURL(NSURL(string: bookmarkMovie.poster)!, placeholderImage: UIImage(named: "scientific15"))
-
+        cell.imageMovie.af_setImageWithURL(NSURL(string: bookmarkMovie.poster)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
+            })
 
         return cell
     }

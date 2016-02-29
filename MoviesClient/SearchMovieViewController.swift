@@ -7,9 +7,9 @@
 //
 
 import UIKit
+
 import Alamofire
 import ObjectMapper
-import AFNetworking
 import AlamofireImage
 
 let selfIdentifier = "searchVC"
@@ -26,8 +26,8 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     var bookmarkMovieToDetail: BookmarkMovie?
     var foundMovieToDetail: FoundMovie?
     var foundMovieArray = [FoundMovie]()
-    var notFoundMovieTitle = String()
-    
+    var itemHeights = [CGFloat](count: 1000, repeatedValue: UITableViewAutomaticDimension)
+
     var onceToken: dispatch_once_t = 0
     
     override func viewDidLoad()
@@ -59,7 +59,11 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     {
         super.viewWillAppear(animated)
         
+        var offSet = CGPoint()
+        offSet = self.tableView.contentOffset
         self.tableView.reloadData()
+        self.tableView.layoutIfNeeded()
+        self.tableView.setContentOffset(offSet, animated: true)
         
         dispatch_once(&onceToken) { () -> Void in
             DatabaseManager.sharedInstance.loadPreviousSearchResult({ (previousSearchResultArray) -> Void in
@@ -91,30 +95,14 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
-        print(searchText)
-        self.notFoundMovieTitle = searchText
-    
-        
         if (searchText.characters.count == 1 || searchText.characters.count == 0) { /* I love C */ } else {
-            
-            let regexExpression = ".*[^A-Za-z0-9].*"
-            let predicat = NSPredicate(format:"SELF MATCHES %@", regexExpression)
-            let result = predicat.evaluateWithObject(searchText)
-            
-//            if (result) {
-            
-//                self.showValidateError()
-                
-//            } else {
-            
+
                 MovieFactory.sharedInstance.collectorFoundMovie(searchString: searchText) { (foundMovieArray) -> Void in
                     self.foundMovieArray = foundMovieArray
-//                    self.searchBar.resignFirstResponder()
                     self.notFoundMovieFlag = false
                     self.tableView.reloadData()
                     DatabaseManager.sharedInstance.saveSearchResult(resultToSave: foundMovieArray)
                     
-//                }
             }
         }
         
@@ -124,7 +112,6 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        
         return UITableViewAutomaticDimension
     }
     
@@ -133,12 +120,19 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         var heightOfRow: CGFloat = 0.0
         
         if !self.notFoundMovieFlag {
-            heightOfRow = UITableViewAutomaticDimension
+            heightOfRow = itemHeights[indexPath.row]
         } else {
             heightOfRow = self.tableView.frame.size.height
         }
         
         return heightOfRow
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if itemHeights[indexPath.row] == UITableViewAutomaticDimension {
+            itemHeights[indexPath.row] = cell.bounds.height
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
@@ -176,9 +170,8 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
             cellMovie.movieDescriptionLabel.text = foundMovie.plot
             cellMovie.countryDataLabel.text = foundMovie.country+" - "+foundMovie.year
             cellMovie.imageMovie.af_setImageWithURL(NSURL(string: foundMovie.poster)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
-                
             })
-
+            cellMovie.contentView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
             
             generalCell = cellMovie
         } else {
@@ -202,7 +195,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
     }
-    
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         if (segue.identifier == "toDetailMovieVC") {

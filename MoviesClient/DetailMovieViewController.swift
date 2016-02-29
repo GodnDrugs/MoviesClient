@@ -7,8 +7,10 @@
 //
 
 import UIKit
+
 import Social
 import MessageUI
+import AlamofireImage
 
 
 let searchIdentifierVC = "searchVC"
@@ -39,6 +41,15 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         self.tableView.registerNib(DetailMovieCell.nibCell(), forCellReuseIdentifier: DetailMovieCell.cellReuseIdentifier())
         self.title = bookmarkMovie?.title
     }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        self.tableView.reloadData()
+
+    }
+
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
@@ -73,16 +84,17 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         cell.writersLabel.text = "Writers: "+(self.bookmarkMovie?.writer)!
         cell.typeMovieLabel.text = "Type: "+(self.bookmarkMovie?.type)!
         cell.plotLabel.text = "Description: "+(self.bookmarkMovie?.plot)!
-        cell.posterImage.setImageWithURL(NSURL(string: (self.bookmarkMovie?.poster)!)!)
-        
+        cell.posterImage.af_setImageWithURL(NSURL(string: (self.bookmarkMovie?.poster)!)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
+        })
+
         return cell
     }
+    
     @IBAction func backButton(sender: AnyObject)
     {
         self.dismissViewControllerAnimated(true) { () -> Void in
             
         }
-//        self.navigationController?.popViewControllerAnimated(true)
     }
 
     @IBAction func showActionSheet(sender: AnyObject)
