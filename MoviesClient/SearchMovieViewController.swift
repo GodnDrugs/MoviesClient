@@ -26,8 +26,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     var bookmarkMovieToDetail: BookmarkMovie?
     var foundMovieToDetail: FoundMovie?
     var foundMovieArray = [FoundMovie]()
-    var itemHeights = [CGFloat](count: 1000, repeatedValue: UITableViewAutomaticDimension)
-
+    
     var onceToken: dispatch_once_t = 0
     
     override func viewDidLoad()
@@ -108,7 +107,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     
-// MARK: - UITableView -
+ // MARK: - UITableView -
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
@@ -120,19 +119,12 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         var heightOfRow: CGFloat = 0.0
         
         if !self.notFoundMovieFlag {
-            heightOfRow = itemHeights[indexPath.row]
+            heightOfRow = UITableViewAutomaticDimension
         } else {
             heightOfRow = self.tableView.frame.size.height
         }
         
         return heightOfRow
-    }
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
-    {
-        if itemHeights[indexPath.row] == UITableViewAutomaticDimension {
-            itemHeights[indexPath.row] = cell.bounds.height
-        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
