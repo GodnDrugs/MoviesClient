@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import ObjectMapper
 import AFNetworking
-
+import AlamofireImage
 
 let selfIdentifier = "searchVC"
 
@@ -175,7 +175,10 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
             cellMovie.titleMovieLabel.text = foundMovie.title
             cellMovie.movieDescriptionLabel.text = foundMovie.plot
             cellMovie.countryDataLabel.text = foundMovie.country+" - "+foundMovie.year
-            cellMovie.imageMovie.setImageWithURL(NSURL(string: foundMovie.poster)!, placeholderImage: UIImage(named: "scientific15"))
+            cellMovie.imageMovie.af_setImageWithURL(NSURL(string: foundMovie.poster)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
+                
+            })
+
             
             generalCell = cellMovie
         } else {
