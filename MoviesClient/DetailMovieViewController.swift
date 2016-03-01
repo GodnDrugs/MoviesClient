@@ -49,7 +49,6 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         self.tableView.reloadData()
 
     }
-
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
@@ -188,6 +187,7 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
             (alert: UIAlertAction!) -> Void in
             DatabaseManager.sharedInstance.deleteMoveFromBookmarks(titleMovieForRemove: (self.bookmarkMovie?.title)!)
             self.foundMovie?.isBookmarked = false
+            self.bookmarkMovie?.isBookmarked = false
             self.tableView.reloadData()
         }
 

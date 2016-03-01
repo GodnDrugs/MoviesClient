@@ -11,13 +11,14 @@ import UIKit
 import AlamofireImage
 
 
-class BookmarksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class BookmarksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bookmarkNavigationBar: UINavigationBar!
     
     var bookmarksMovieArray = [BookmarkMovie]()
     var bookmarkMovie: BookmarkMovie? = nil
+    var imdbIDArray = [String]()
     
     var itemHeights = [CGFloat](count: 1000, repeatedValue: UITableViewAutomaticDimension)
     
@@ -32,6 +33,8 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 100
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        self.tabBarController?.delegate = self
     
         tableView.registerNib(SearchViewCell.nibSearchCell(), forCellReuseIdentifier: SearchViewCell.cellSearchReuseIdentifier())
     }
@@ -41,6 +44,12 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewWillAppear(animated)
         
         self.tableView.reloadData()
+        
+        for movie in self.bookmarksMovieArray {
+            if !movie.isBookmarked {
+                self.imdbIDArray.append(movie.imdbID)
+            }
+        }
 
         DatabaseManager.sharedInstance.getMovieBookmarks { (bookmarkMovieArray) -> Void in
             self.bookmarksMovieArray = bookmarkMovieArray
@@ -48,13 +57,10 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
-    {
-        if (segue.identifier == "toDetailMovieVC") {
-            var vc = DetailMovieViewController()
-            vc = segue.destinationViewController as! DetailMovieViewController
-            vc.bookmarkMovie = self.bookmarkMovie
-        }
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+        let searchVC = self.tabBarController?.viewControllers![0] as! SearchMovieViewController
+        searchVC.imdbIDDeleteArray = self.imdbIDArray
+        return true
     }
     
 // MARK: - UITableView -
@@ -102,6 +108,15 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
             })
 
         return cell
+    }
+// MARK: - PrepareForSegue -
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if (segue.identifier == "toDetailMovieVC") {
+            var vc = DetailMovieViewController()
+            vc = segue.destinationViewController as! DetailMovieViewController
+            vc.bookmarkMovie = self.bookmarkMovie
+        }
     }
     
     override func prefersStatusBarHidden() -> Bool
