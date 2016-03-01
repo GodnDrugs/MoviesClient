@@ -58,7 +58,6 @@
 		64E304F11C83059C0018D434 /* NotFoundViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotFoundViewCell.xib; sourceTree = "<group>"; };
 		64E4D0601C752DDA000220F4 /* CustomActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicatorView.swift; sourceTree = "<group>"; };
 		64E64EF21C79FA4F00920151 /* movieclient.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = movieclient.sqlite; sourceTree = "<group>"; };
-		64EAB9581C8500E2007BA469 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		64ED076E1C7CF02E00F50A6B /* DetailMovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailMovieViewController.swift; sourceTree = "<group>"; };
 		64ED076F1C7CF02E00F50A6B /* DetailMovieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailMovieViewController.xib; sourceTree = "<group>"; };
 		64ED07721C7CF69400F50A6B /* DetailMovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailMovieCell.swift; sourceTree = "<group>"; };
@@ -156,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				64E1A2E41C64E81B003B47D9 /* AppDelegate.swift */,
-				64EAB9581C8500E2007BA469 /* MyPlayground.playground */,
 			);
 			name = "App Delegate";
 			sourceTree = "<group>";

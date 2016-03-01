@@ -42,9 +42,9 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        
+
         self.tableView.reloadData()
-        
+
         for movie in self.bookmarksMovieArray {
             if !movie.isBookmarked {
                 self.imdbIDArray.append(movie.imdbID)
@@ -106,6 +106,9 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.countryDataLabel.text = timeGenreYearCountry
         cell.imageMovie.af_setImageWithURL(NSURL(string: bookmarkMovie.poster)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
             })
+        if systemVersion < "9.0" {
+            cell.updateConstraintsIfNeeded()
+        }
 
         return cell
     }

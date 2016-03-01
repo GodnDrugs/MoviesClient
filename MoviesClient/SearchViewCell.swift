@@ -28,7 +28,7 @@ class SearchViewCell: UITableViewCell {
         self.cardView.layer.borderWidth = 1.0
         self.cardView.layer.borderColor = UIColor.grayColor().CGColor
     }
-        
+    
     class func nibSearchCell() -> UINib
     {
         let nib = UINib(nibName: "SearchViewCell", bundle: nil)

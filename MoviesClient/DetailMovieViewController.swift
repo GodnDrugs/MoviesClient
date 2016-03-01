@@ -40,17 +40,49 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         
         self.tableView.registerNib(DetailMovieCell.nibCell(), forCellReuseIdentifier: DetailMovieCell.cellReuseIdentifier())
         self.title = bookmarkMovie?.title
+        self.tableView.reloadData()
+
     }
     
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
         
+        /* self.view.setNeeds for iOS => 8.1 */
+//        self.view.setNeedsUpdateConstraints()
+//        self.view.setNeedsLayout()
+//        self.tableView.layoutIfNeeded()
+
+//        self.view.setNeedsLayout()
+//        self.view.setNeedsUpdateConstraints()
+//        self.tableView.layoutIfNeeded()
+//        self.tableView.updateConstraintsIfNeeded()
+//        self.tableView.updateConstraints()
+//        self.tableView.setNeedsLayout()
+//        self.tableView.setNeedsUpdateConstraints()
+//        self.view.updateConstraints()
+//        self.view.updateConstraintsIfNeeded()
+        
         self.tableView.reloadData()
+        
+//        self.view.setNeedsLayout()
+//        self.view.setNeedsUpdateConstraints()
+//        self.tableView.layoutIfNeeded()
+//        self.tableView.updateConstraintsIfNeeded()
+//        self.tableView.updateConstraints()
+//        self.tableView.setNeedsLayout()
+//        self.tableView.setNeedsUpdateConstraints()
+//        self.view.updateConstraints()
+//        self.view.updateConstraintsIfNeeded()
 
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat
     {
         return UITableViewAutomaticDimension
     }
@@ -85,6 +117,10 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         cell.plotLabel.text = "Description: "+(self.bookmarkMovie?.plot)!
         cell.posterImage.af_setImageWithURL(NSURL(string: (self.bookmarkMovie?.poster)!)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
         })
+        
+        if systemVersion < "9.0" {
+            cell.updateConstraintsIfNeeded()
+        }
 
         return cell
     }

@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate/*, SplashScreenViewControl
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
-        
 
 //        let filter = string.stringByReplacingOccurrencesOfString(" ", withString: "+")
 //        print(filter)
@@ -27,11 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate/*, SplashScreenViewControl
 //        UISearchBar.appearance().placeholder = "Поиск"
 //        UISearchBar.appearance().tintColor = UIColor.whiteColor()
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        
+        
 //        let splashScreen = storyboard.instantiateViewControllerWithIdentifier("SplashScreen") as! SplashScreenViewController
 //        splashScreen.delegate = AppDelegate()
 //        self.window!.rootViewController = splashScreen
 //        self.window!.makeKeyAndVisible()
+        
         return true
     }
     

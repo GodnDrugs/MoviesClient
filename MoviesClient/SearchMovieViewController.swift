@@ -13,6 +13,7 @@ import ObjectMapper
 import AlamofireImage
 
 let selfIdentifier = "searchVC"
+let systemVersion = UIDevice.currentDevice().systemVersion
 
 class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, MovieFactoryDelegate, UISearchControllerDelegate {
     
@@ -58,7 +59,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-
+        
         var offSet = CGPoint()
         offSet = self.tableView.contentOffset
         self.tableView.reloadData()
@@ -76,6 +77,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         }
 
     }
+    
 
 // MARK: - UISearchBar -
     
@@ -95,7 +97,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
-        if (/*searchText.characters.count == 1 ||*/searchText.characters.count == 0) { /* I love C */ } else {
+        if (searchText.characters.count == 1 || searchText.characters.count == 0) { /* I love C */ } else {
 
                 MovieFactory.sharedInstance.collectorFoundMovie(searchString: searchText) { (foundMovieArray) -> Void in
                     self.foundMovieArray = foundMovieArray
@@ -173,7 +175,10 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
             cellMovie.countryDataLabel.text = foundMovie.country+" - "+foundMovie.year
             cellMovie.imageMovie.af_setImageWithURL(NSURL(string: foundMovie.poster)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
             })
-            cellMovie.contentView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
+            
+            if systemVersion < "9.0" {
+                cellMovie.updateConstraintsIfNeeded()
+            }
             
             generalCell = cellMovie
         } else {
