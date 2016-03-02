@@ -97,7 +97,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
-        if (searchText.characters.count == 1 || searchText.characters.count == 0) { /* I love C */ } else {
+        if (searchText.characters.count == 1 || searchText.characters.count == 0) {/*this code is sucked into outer space*/} else {
 
                 MovieFactory.sharedInstance.collectorFoundMovie(searchString: searchText) { (foundMovieArray) -> Void in
                     self.foundMovieArray = foundMovieArray
