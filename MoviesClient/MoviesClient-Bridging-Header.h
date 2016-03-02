@@ -4,4 +4,3 @@
 
 #import <Foundation/Foundation.h>
 #import <FMDB/FMDatabase.h>
-#import <AFNetworking/AFNetworking.h>
