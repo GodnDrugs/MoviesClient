@@ -19,6 +19,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     var bookmarksMovieArray = [BookmarkMovie]()
     var bookmarkMovie: BookmarkMovie? = nil
     var imdbIDArray = [String]()
+    var isBookmarksExist: Bool = true
     
     var itemHeights = [CGFloat](count: 1000, repeatedValue: UITableViewAutomaticDimension)
     
@@ -37,6 +38,8 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         self.tabBarController?.delegate = self
     
         tableView.registerNib(SearchViewCell.nibSearchCell(), forCellReuseIdentifier: SearchViewCell.cellSearchReuseIdentifier())
+        tableView.registerNib(NotBookmarksViewCell.nibCell(), forCellReuseIdentifier: NotBookmarksViewCell.cellReuseIdentifier())
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
     }
     
     override func viewWillAppear(animated: Bool)
@@ -53,6 +56,11 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
 
         DatabaseManager.sharedInstance.getMovieBookmarks { (bookmarkMovieArray) -> Void in
             self.bookmarksMovieArray = bookmarkMovieArray
+            if (bookmarkMovieArray.count == 0) {
+                self.isBookmarksExist = false
+            } else {
+                self.isBookmarksExist = true
+            }
             self.tableView.reloadData()
         }
     }
@@ -73,12 +81,26 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return self.bookmarksMovieArray.count
+        var numberOfRows = 0
+        if !self.isBookmarksExist {
+            numberOfRows = 1
+        } else {
+            numberOfRows = self.bookmarksMovieArray.count
+        }
+        
+        return numberOfRows
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return UITableViewAutomaticDimension
+        var heightRow: CGFloat = 0.0
+        if !self.isBookmarksExist {
+            heightRow = self.tableView.frame.size.height
+        } else {
+            heightRow = UITableViewAutomaticDimension
+        }
+        
+        return heightRow
     }
 
     
@@ -96,23 +118,37 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
-        let bookmarkMovie = self.bookmarksMovieArray[indexPath.row]
-        var timeGenreYearCountry = bookmarkMovie.runtime!+" - "+bookmarkMovie.genre!
-        timeGenreYearCountry += " - "+bookmarkMovie.year!+" - "+bookmarkMovie.country!
+        self.tableView.scrollEnabled = false
+        var generalCell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier(kCellIdentifier)! as UITableViewCell
         
-        cell.titleMovieLabel.text = bookmarkMovie.title
-        cell.movieDescriptionLabel.text = bookmarkMovie.plot
-        cell.countryDataLabel.text = timeGenreYearCountry
-        cell.imageMovie.af_setImageWithURL(NSURL(string: bookmarkMovie.poster)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
+        if !self.isBookmarksExist {
+            let notBookmarksCell = tableView.dequeueReusableCellWithIdentifier(NotBookmarksViewCell.cellReuseIdentifier()) as! NotBookmarksViewCell
+            generalCell = notBookmarksCell
+        } else {
+            self.tableView.scrollEnabled = true
+            let capCell = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
+            let bookmarkMovie = self.bookmarksMovieArray[indexPath.row]
+            var timeGenreYearCountry = bookmarkMovie.runtime!+" - "+bookmarkMovie.genre!
+            timeGenreYearCountry += " - "+bookmarkMovie.year!+" - "+bookmarkMovie.country!
+            
+            capCell.titleMovieLabel.text = bookmarkMovie.title
+            capCell.movieDescriptionLabel.text = bookmarkMovie.plot
+            capCell.countryDataLabel.text = timeGenreYearCountry
+            capCell.imageMovie.af_setImageWithURL(NSURL(string: bookmarkMovie.poster)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
             })
-        if systemVersion < "9.0" {
-            cell.updateConstraintsIfNeeded()
+            
+            if systemVersion < "9.0" {
+                capCell.updateConstraintsIfNeeded()
+            }
+            
+            generalCell = capCell
         }
 
-        return cell
+        return generalCell
     }
+    
 // MARK: - PrepareForSegue -
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         if (segue.identifier == "toDetailMovieVC") {

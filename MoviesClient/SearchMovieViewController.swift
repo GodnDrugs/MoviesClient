@@ -58,17 +58,14 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.registerNib(NotFoundViewCell.nibCell(), forCellReuseIdentifier: NotFoundViewCell.cellReuseIdentifier())
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
     }
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.layoutIfNeeded()
-    }
 
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        
         self.setNeedsStatusBarAppearanceUpdate()
+        self.tableView.scrollEnabled = true
 
-//        self.tabBarController?.tabBarController?.view.backgroundColor = UIColor.blueColor()
         var offSet = CGPoint()
         offSet = self.tableView.contentOffset
         self.tableView.reloadData()
