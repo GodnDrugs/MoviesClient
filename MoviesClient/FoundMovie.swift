@@ -19,6 +19,7 @@ class FoundMovie: NSObject, Mappable {
     var country: String! = "No Information"
     var poster: String! = ""
     var plot: String! = "No Information"
+    var bookmarked: String = ""
     
     var isBookmarked: Bool = false
     
@@ -59,6 +60,7 @@ extension FoundMovie {
         foundMovie.country = resultSet.stringForColumn("country")
         foundMovie.poster = resultSet.stringForColumn("poster")
         foundMovie.plot = resultSet.stringForColumn("plot")
+        foundMovie.bookmarked = resultSet.stringForColumn("is_bookmarked")
         
         return foundMovie
     }

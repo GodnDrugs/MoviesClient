@@ -67,7 +67,7 @@
                                     <constraint firstAttribute="height" constant="54" id="M3t-7H-CgW"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fUS-PG-N73">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fUS-PG-N73">
                                 <rect key="frame" x="5" y="261" width="398" height="202"/>
                             </imageView>
                         </subviews>

@@ -67,7 +67,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         
         dispatch_once(&onceToken) { () -> Void in
             DatabaseManager.sharedInstance.loadPreviousSearchResult({ (previousSearchResultArray) -> Void in
-                if previousSearchResultArray.count == 0 {
+                if (previousSearchResultArray.count == 0) {
                     return
                 }
                 self.foundMovieArray = previousSearchResultArray
@@ -77,7 +77,6 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
 
     }
     
-
 // MARK: - UISearchBar -
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
@@ -160,9 +159,15 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
                 cellMovie.bookmarkImageView.image = nil
             }
             
+            if foundMovie.bookmarked == "true" {
+                cellMovie.bookmarkImageView.image = UIImage(named: "bookmarks")
+            } else {
+                cellMovie.bookmarkImageView.image = nil
+            }
+            
             if (self.imdbIDDeleteArray.count > 0) {
                 for i in self.imdbIDDeleteArray {
-                    if i == foundMovie.imdbID {
+                    if (i == foundMovie.imdbID) {
                         cellMovie.bookmarkImageView.image = nil
                         foundMovie.isBookmarked = false
                     }
@@ -175,7 +180,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
             cellMovie.imageMovie.af_setImageWithURL(NSURL(string: foundMovie.poster)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
             })
             
-            if systemVersion < "9.0" {
+            if (systemVersion < "9.0") {
                 cellMovie.updateConstraintsIfNeeded()
             }
             

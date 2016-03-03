@@ -24,6 +24,7 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
     var checkViewController = String()
     var bookmarkMovie: BookmarkMovie?
     var foundMovie: FoundMovie?
+    var itemHeights = [CGFloat](count: 1000, repeatedValue: UITableViewAutomaticDimension)
 
     override func viewDidLoad()
     {
@@ -51,6 +52,18 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         self.tableView.reloadData()
     }
     
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if itemHeights[indexPath.row] == UITableViewAutomaticDimension {
+            itemHeights[indexPath.row] = cell.bounds.height
+        }
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        return itemHeights[indexPath.row]
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         return UITableViewAutomaticDimension
@@ -70,11 +83,17 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
     {
         let cell = tableView.dequeueReusableCellWithIdentifier(DetailMovieCell.cellReuseIdentifier()) as! DetailMovieCell
         
-        if checkViewController == searchIdentifierVC {
+        if (checkViewController == searchIdentifierVC) {
             if ((self.foundMovie?.isBookmarked) != true) {
                 cell.bookmarkImage.image = nil
             } else {
                 cell.bookmarkImage.image = UIImage(named: "bookmarks")
+            }
+            
+            if (self.foundMovie?.bookmarked == "true") {
+                cell.bookmarkImage.image = UIImage(named: "bookmarks")
+            } else {
+                cell.bookmarkImage.image = nil
             }
         } else {
             cell.bookmarkImage.image = UIImage(named: "bookmarks")
@@ -137,8 +156,8 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         optionMenu.addAction(emailAction)
         optionMenu.addAction(cancelAction)
         
-        if checkViewController == searchIdentifierVC {
-            if ((self.foundMovie?.isBookmarked) == true) {
+        if (checkViewController == searchIdentifierVC) {
+            if ((self.foundMovie?.isBookmarked) == true || self.foundMovie?.bookmarked == "true") {
                 optionMenu.addAction(self.deleteFromBookmarksAlert())
             } else {
                 optionMenu.addAction(self.addToBookmarksAlert())
@@ -184,6 +203,8 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
             (alert: UIAlertAction!) -> Void in
             print("")
             DatabaseManager.sharedInstance.addMovieToBookmarks(addToBookmarks: self.bookmarkMovie!)
+            DatabaseManager.sharedInstance.markAddedToBookmarks(imdbID: (self.foundMovie?.imdbID)!, isBookmark: "true")
+            self.foundMovie?.bookmarked = "true"
             self.foundMovie?.isBookmarked = true
             self.tableView.reloadData()
         }
@@ -197,6 +218,8 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
             (alert: UIAlertAction!) -> Void in
             DatabaseManager.sharedInstance.deleteMoveFromBookmarks(titleMovieForRemove: (self.bookmarkMovie?.title)!)
             self.foundMovie?.isBookmarked = false
+            self.foundMovie?.bookmarked = "false"
+            DatabaseManager.sharedInstance.unmark(imdbID: (self.foundMovie?.imdbID)!, isBookmark: "false")
             self.bookmarkMovie?.isBookmarked = false
             self.tableView.reloadData()
         }
