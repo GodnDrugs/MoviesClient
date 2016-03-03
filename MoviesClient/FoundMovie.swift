@@ -13,18 +13,18 @@ import FMDB
 
 class FoundMovie: NSObject, Mappable {
     
-    var imdbID: String!
-    var title: String!
-    var year: String!
-    var country: String!
-    var poster: String!
-    var plot: String!
+    var imdbID: String! = ""
+    var title: String! = "No Information"
+    var year: String! = "No Information"
+    var country: String! = "No Information"
+    var poster: String! = ""
+    var plot: String! = "No Information"
     
     var isBookmarked: Bool = false
     
     override init()
     {
-//        self.imdbID = ""
+
     }
     
     required convenience init?(_ map: Map)

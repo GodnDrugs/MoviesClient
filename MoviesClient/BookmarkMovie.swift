@@ -13,25 +13,25 @@ import FMDB
 
 class BookmarkMovie: NSObject, Mappable {
 
-    var title: String!
-    var year: String!
-    var rated: String!
-    var released: String!
-    var runtime: String!
-    var genre: String!
-    var director: String!
-    var writer: String!
-    var actors: String!
-    var plot: String!
-    var language: String!
-    var country: String!
-    var awards: String!
-    var poster: String!
-    var metascore: String!
-    var imdbRating: String!
-    var imdbVotes: String!
-    var imdbID: String!
-    var type: String!
+    var title: String! = "No Information"
+    var year: String! = "No Information"
+    var rated: String! = "No Information"
+    var released: String! = "No Information"
+    var runtime: String! = "No Information"
+    var genre: String! = "No Information"
+    var director: String! = "No Information"
+    var writer: String! = "No Information"
+    var actors: String! = "No Information"
+    var plot: String! = "No Information"
+    var language: String! = "No Information"
+    var country: String! = "No Information"
+    var awards: String! = "No Information"
+    var poster: String! = "No Information"
+    var metascore: String! = "No Information"
+    var imdbRating: String! = "No Information"
+    var imdbVotes: String! = "No Information"
+    var imdbID: String! = ""
+    var type: String! = "No Information"
     
     var isBookmarked: Bool = true
     
