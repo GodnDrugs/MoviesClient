@@ -48,33 +48,7 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
     {
         super.viewWillAppear(animated)
         
-        /* self.view.setNeeds for iOS => 8.1 */
-//        self.view.setNeedsUpdateConstraints()
-//        self.view.setNeedsLayout()
-//        self.tableView.layoutIfNeeded()
-
-//        self.view.setNeedsLayout()
-//        self.view.setNeedsUpdateConstraints()
-//        self.tableView.layoutIfNeeded()
-//        self.tableView.updateConstraintsIfNeeded()
-//        self.tableView.updateConstraints()
-//        self.tableView.setNeedsLayout()
-//        self.tableView.setNeedsUpdateConstraints()
-//        self.view.updateConstraints()
-//        self.view.updateConstraintsIfNeeded()
-        
         self.tableView.reloadData()
-        
-//        self.view.setNeedsLayout()
-//        self.view.setNeedsUpdateConstraints()
-//        self.tableView.layoutIfNeeded()
-//        self.tableView.updateConstraintsIfNeeded()
-//        self.tableView.updateConstraints()
-//        self.tableView.setNeedsLayout()
-//        self.tableView.setNeedsUpdateConstraints()
-//        self.view.updateConstraints()
-//        self.view.updateConstraintsIfNeeded()
-
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat

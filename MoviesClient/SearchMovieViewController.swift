@@ -12,11 +12,6 @@ import Alamofire
 import ObjectMapper
 import AlamofireImage
 
-let selfIdentifier = "searchVC"
-let systemVersion = UIDevice.currentDevice().systemVersion
-let kCellIdentifier = "GeneralCell"
-let kSegueIdentifire = "toDetailMovieVC"
-
 class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, MovieFactoryDelegate, UISearchControllerDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -62,10 +57,8 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        
         self.setNeedsStatusBarAppearanceUpdate()
         self.tableView.scrollEnabled = true
-
         var offSet = CGPoint()
         offSet = self.tableView.contentOffset
         self.tableView.reloadData()

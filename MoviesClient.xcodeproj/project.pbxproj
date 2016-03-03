@@ -33,6 +33,7 @@
 		64F6F03D1C7F0CC000967E7D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64F6F03C1C7F0CC000967E7D /* Social.framework */; };
 		64FAD4E71C8859E0005382DB /* NotBookmarksViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FAD4E51C8859E0005382DB /* NotBookmarksViewCell.swift */; };
 		64FAD4E81C8859E0005382DB /* NotBookmarksViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64FAD4E61C8859E0005382DB /* NotBookmarksViewCell.xib */; };
+		64FAD4EE1C889249005382DB /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FAD4ED1C889249005382DB /* Defines.swift */; };
 		96F4E47BC2CB142C02D721DB /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBC5FB14701FDA946CAAE76 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		64F6F03C1C7F0CC000967E7D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		64FAD4E51C8859E0005382DB /* NotBookmarksViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotBookmarksViewCell.swift; sourceTree = "<group>"; };
 		64FAD4E61C8859E0005382DB /* NotBookmarksViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotBookmarksViewCell.xib; sourceTree = "<group>"; };
+		64FAD4ED1C889249005382DB /* Defines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
 		ADBC5FB14701FDA946CAAE76 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1323F2CCAC4E5C8BA2C70DB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				64E1A2E41C64E81B003B47D9 /* AppDelegate.swift */,
+				64FAD4ED1C889249005382DB /* Defines.swift */,
 			);
 			name = "App Delegate";
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64FAD4EE1C889249005382DB /* Defines.swift in Sources */,
 				64E4D0611C752DDA000220F4 /* CustomActivityIndicatorView.swift in Sources */,
 				64ED07701C7CF02E00F50A6B /* DetailMovieViewController.swift in Sources */,
 				641D93561C68DDDB00FB727B /* DatabaseManager.swift in Sources */,
