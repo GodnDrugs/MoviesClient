@@ -29,6 +29,11 @@ class DetailMovieCell: UITableViewCell {
         self.cardView.layer.borderWidth = 2.0
         self.cardView.layer.borderColor = UIColor.grayColor().CGColor
         self.selectionStyle = UITableViewCellSelectionStyle.None
+
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
     }
 
     class func nibCell() -> UINib

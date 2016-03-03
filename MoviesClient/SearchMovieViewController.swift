@@ -14,6 +14,8 @@ import AlamofireImage
 
 let selfIdentifier = "searchVC"
 let systemVersion = UIDevice.currentDevice().systemVersion
+let kCellIdentifier = "GeneralCell"
+let kSegueIdentifire = "toDetailMovieVC"
 
 class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, MovieFactoryDelegate, UISearchControllerDelegate {
     
@@ -36,7 +38,8 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
 
         MovieFactory.sharedInstance.delegate = self
-        
+        self.setNeedsStatusBarAppearanceUpdate()
+
         self.searchBar.resignFirstResponder()
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -46,20 +49,26 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         self.searchBar.placeholder = "Search..."
         self.searchBar.showsCancelButton = true
         self.searchBar.sizeToFit()
-        
+                
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.view.endEditing(true)
         
         tableView.registerNib(SearchViewCell.nibSearchCell(), forCellReuseIdentifier: SearchViewCell.cellSearchReuseIdentifier())
         tableView.registerNib(NotFoundViewCell.nibCell(), forCellReuseIdentifier: NotFoundViewCell.cellReuseIdentifier())
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "GeneralCell")
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.layoutIfNeeded()
     }
 
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        
+        self.setNeedsStatusBarAppearanceUpdate()
+
+//        self.tabBarController?.tabBarController?.view.backgroundColor = UIColor.blueColor()
         var offSet = CGPoint()
         offSet = self.tableView.contentOffset
         self.tableView.reloadData()
@@ -148,7 +157,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        var generalCell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("GeneralCell")! as UITableViewCell
+        var generalCell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier(kCellIdentifier)! as UITableViewCell
         
         if !self.notFoundMovieFlag {
             let cellMovie = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
@@ -198,14 +207,14 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         
         MovieFactory.sharedInstance.collectorBookmarkMovie(bookmarkMovieID: movieID!) { (bookmarkMovie) -> Void in
             self.bookmarkMovieToDetail = bookmarkMovie
-            self.performSegueWithIdentifier("toDetailMovieVC", sender: self)
+            self.performSegueWithIdentifier(kSegueIdentifire, sender: self)
         }
         
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
-        if (segue.identifier == "toDetailMovieVC") {
+        if (segue.identifier == kSegueIdentifire) {
             var vc = DetailMovieViewController()
             vc = segue.destinationViewController as! DetailMovieViewController
             vc.bookmarkMovie = self.bookmarkMovieToDetail

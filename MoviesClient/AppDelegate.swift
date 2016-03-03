@@ -18,11 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate/*, SplashScreenViewControl
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
-
+    
+//        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
+    
 //        let filter = string.stringByReplacingOccurrencesOfString(" ", withString: "+")
 //        print(filter)
-//        UINavigationBar.appearance().barTintColor = UIColor.greenColor()
-//        UISearchBar.appearance().barTintColor = UIColor.greenColor()
+//        UINavigationBar.appearance().barTintColor = UIColor.blackColor()
+//        UISearchBar.appearance().barTintColor = UIColor.whiteColor()
 //        UISearchBar.appearance().placeholder = "Поиск"
 //        UISearchBar.appearance().tintColor = UIColor.whiteColor()
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -34,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate/*, SplashScreenViewControl
         
         return true
     }
-    
     
     
 //    func condenseWhitespace(string: String) -> String {

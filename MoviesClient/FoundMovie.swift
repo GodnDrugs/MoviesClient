@@ -24,7 +24,7 @@ class FoundMovie: NSObject, Mappable {
     
     override init()
     {
-        
+//        self.imdbID = ""
     }
     
     required convenience init?(_ map: Map)

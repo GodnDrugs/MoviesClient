@@ -15,7 +15,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="434" height="509"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYM-IV-kgM">
+                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="cYM-IV-kgM">
                         <rect key="frame" x="13" y="13" width="408" height="483"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time - Genre - Year - Country" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klG-Y0-byA">
@@ -67,11 +67,8 @@
                                     <constraint firstAttribute="height" constant="54" id="M3t-7H-CgW"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scientific08" translatesAutoresizingMaskIntoConstraints="NO" id="fUS-PG-N73">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fUS-PG-N73">
                                 <rect key="frame" x="5" y="261" width="398" height="202"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="202" id="vnz-8T-dH7"/>
-                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -80,14 +77,14 @@
                             <constraint firstItem="9xn-xZ-yzb" firstAttribute="top" secondItem="AxE-ah-r2j" secondAttribute="bottom" constant="10" id="34n-Lk-oa5"/>
                             <constraint firstItem="d8t-Pa-bLU" firstAttribute="leading" secondItem="cYM-IV-kgM" secondAttribute="leading" constant="5" id="4Y4-Zc-hMv"/>
                             <constraint firstItem="klG-Y0-byA" firstAttribute="leading" secondItem="cYM-IV-kgM" secondAttribute="leading" constant="5" id="5BG-HC-5rw"/>
-                            <constraint firstAttribute="bottom" secondItem="fUS-PG-N73" secondAttribute="bottom" constant="20" id="6El-eB-vxW"/>
                             <constraint firstAttribute="trailing" secondItem="9xn-xZ-yzb" secondAttribute="trailing" constant="5" id="9D8-AZ-3Id"/>
                             <constraint firstAttribute="trailing" secondItem="AxE-ah-r2j" secondAttribute="trailing" constant="5" id="AGH-VQ-9qG"/>
                             <constraint firstItem="9xn-xZ-yzb" firstAttribute="leading" secondItem="cYM-IV-kgM" secondAttribute="leading" constant="5" id="Aev-Fw-Jjs"/>
                             <constraint firstItem="klG-Y0-byA" firstAttribute="top" secondItem="4BG-Zp-YLT" secondAttribute="bottom" constant="11" id="B3t-Gf-jQ8"/>
                             <constraint firstItem="cDc-Lm-RJ9" firstAttribute="top" secondItem="d8t-Pa-bLU" secondAttribute="bottom" constant="10" id="G5r-Ec-wpJ"/>
-                            <constraint firstAttribute="trailing" secondItem="fUS-PG-N73" secondAttribute="trailing" constant="5" id="PRe-Qb-RAo"/>
+                            <constraint firstItem="fUS-PG-N73" firstAttribute="top" secondItem="9xn-xZ-yzb" secondAttribute="bottom" constant="20" id="Hfv-cc-Rq0"/>
                             <constraint firstItem="E8e-9F-Xsw" firstAttribute="leading" secondItem="cYM-IV-kgM" secondAttribute="leading" constant="5" id="Sbi-Kq-S0P"/>
+                            <constraint firstAttribute="bottom" secondItem="fUS-PG-N73" secondAttribute="bottom" constant="20" id="Tuf-Uv-1Ku"/>
                             <constraint firstAttribute="trailing" secondItem="4BG-Zp-YLT" secondAttribute="trailing" constant="10" id="UaZ-6E-fE9"/>
                             <constraint firstItem="AxE-ah-r2j" firstAttribute="top" secondItem="eJS-ZC-Gd0" secondAttribute="bottom" constant="10" id="XTB-u7-byE"/>
                             <constraint firstAttribute="trailing" secondItem="cDc-Lm-RJ9" secondAttribute="trailing" constant="5" id="YzU-HN-PPF"/>
@@ -99,18 +96,19 @@
                             <constraint firstAttribute="trailing" secondItem="d8t-Pa-bLU" secondAttribute="trailing" constant="5" id="qMp-ZD-sBJ"/>
                             <constraint firstItem="d8t-Pa-bLU" firstAttribute="top" secondItem="klG-Y0-byA" secondAttribute="bottom" constant="10" id="qpe-eH-jUc"/>
                             <constraint firstItem="AxE-ah-r2j" firstAttribute="leading" secondItem="cYM-IV-kgM" secondAttribute="leading" constant="5" id="si0-Ep-Qeb"/>
-                            <constraint firstItem="fUS-PG-N73" firstAttribute="top" secondItem="9xn-xZ-yzb" secondAttribute="bottom" constant="20" id="so0-qH-aPv"/>
                             <constraint firstItem="E8e-9F-Xsw" firstAttribute="top" secondItem="cYM-IV-kgM" secondAttribute="top" constant="10" id="tNT-65-sQs"/>
-                            <constraint firstItem="fUS-PG-N73" firstAttribute="leading" secondItem="cYM-IV-kgM" secondAttribute="leading" constant="5" id="uRl-p4-CGg"/>
+                            <constraint firstAttribute="trailing" secondItem="fUS-PG-N73" secondAttribute="trailing" constant="5" id="uQj-1W-veV"/>
                             <constraint firstItem="4BG-Zp-YLT" firstAttribute="leading" secondItem="E8e-9F-Xsw" secondAttribute="trailing" id="wwP-Z1-6Yw"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="cYM-IV-kgM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="AzF-aP-n0U"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="fUS-PG-N73" secondAttribute="trailing" constant="10" id="E7a-un-jv2"/>
                     <constraint firstAttribute="bottomMargin" secondItem="cYM-IV-kgM" secondAttribute="bottom" constant="5" id="LuZ-dm-aZ1"/>
                     <constraint firstItem="cYM-IV-kgM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="RBV-4a-m4Z"/>
                     <constraint firstAttribute="trailingMargin" secondItem="cYM-IV-kgM" secondAttribute="trailing" constant="5" id="b5g-9t-1Xg"/>
+                    <constraint firstItem="fUS-PG-N73" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="rti-Tr-fEO"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -128,7 +126,4 @@
             <point key="canvasLocation" x="301" y="24"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="scientific08" width="990" height="743"/>
-    </resources>
 </document>
