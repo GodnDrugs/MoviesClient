@@ -130,6 +130,7 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
     @IBAction func showActionSheet(sender: AnyObject)
     {
         let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .ActionSheet)
+        optionMenu.view.tintColor = UIColor.brownColor()
         
         let shareToTwitter = UIAlertAction(title: "Twitter share", style: .Default) {
             (alert: UIAlertAction!) -> Void in
@@ -216,6 +217,8 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
     
     func deleteFromBookmarksAlert() -> UIAlertAction
     {
+
+        
         let removeBookmarkAction = UIAlertAction(title: "Remove from Bookmarks", style: .Default) {
             (alert: UIAlertAction!) -> Void in
             DatabaseManager.sharedInstance.deleteMoveFromBookmarks(titleMovieForRemove: (self.bookmarkMovie?.title)!)

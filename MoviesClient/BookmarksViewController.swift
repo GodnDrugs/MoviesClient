@@ -47,7 +47,6 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewWillAppear(animated)
 
         self.tableView.reloadData()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "OpenSans-Italic", size: 10.0)!, NSForegroundColorAttributeName: UIColor.whiteColor()]
 
         for movie in self.bookmarksMovieArray {
             if !movie.isBookmarked {

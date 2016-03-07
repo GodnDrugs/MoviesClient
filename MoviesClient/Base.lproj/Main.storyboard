@@ -80,7 +80,7 @@
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Q2O-WV-gzB" secondAttribute="trailing" id="5Ha-Np-UeK"/>
                             <constraint firstItem="wcH-0z-M8S" firstAttribute="top" secondItem="Q2O-WV-gzB" secondAttribute="bottom" id="RSV-w6-N78"/>

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-SemiboldItalic.ttf">
@@ -22,8 +23,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ugd-rS-46S">
                         <rect key="frame" x="5" y="5" width="381" height="366"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUG-1j-1yO">
-                                <rect key="frame" x="5" y="172" width="371" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUG-1j-1yO">
+                                <rect key="frame" x="166" y="169" width="50" height="28"/>
                                 <fontDescription key="fontDescription" name="OpenSans-SemiboldItalic" family="Open Sans" pointSize="20"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -31,18 +32,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="wUG-1j-1yO" secondAttribute="bottom" constant="173" id="85w-RW-z27"/>
-                            <constraint firstAttribute="trailing" secondItem="wUG-1j-1yO" secondAttribute="trailing" constant="5" id="fbc-re-Xfg"/>
-                            <constraint firstItem="wUG-1j-1yO" firstAttribute="leading" secondItem="Ugd-rS-46S" secondAttribute="leading" constant="5" id="lqS-dx-otT"/>
-                            <constraint firstItem="wUG-1j-1yO" firstAttribute="top" secondItem="Ugd-rS-46S" secondAttribute="top" constant="172" id="x03-KU-l0H"/>
+                            <constraint firstItem="wUG-1j-1yO" firstAttribute="centerX" secondItem="Ugd-rS-46S" secondAttribute="centerX" id="9Qe-oo-46W"/>
+                            <constraint firstItem="wUG-1j-1yO" firstAttribute="centerY" secondItem="Ugd-rS-46S" secondAttribute="centerY" id="fMq-1A-vQz"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Ugd-rS-46S" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="09B-0K-gYJ"/>
-                    <constraint firstAttribute="bottom" secondItem="Ugd-rS-46S" secondAttribute="bottom" constant="5" id="nsq-ul-aTM"/>
-                    <constraint firstAttribute="trailing" secondItem="Ugd-rS-46S" secondAttribute="trailing" constant="5" id="qe4-Yk-e0R"/>
-                    <constraint firstItem="Ugd-rS-46S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="xgB-8y-FjI"/>
+                    <constraint firstItem="Ugd-rS-46S" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="070-fo-RSR"/>
+                    <constraint firstItem="Ugd-rS-46S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-3" id="ecb-0Q-dgu"/>
+                    <constraint firstItem="Ugd-rS-46S" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-3" id="jUs-Ms-TA4"/>
+                    <constraint firstItem="Ugd-rS-46S" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rtN-ba-Zbf"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
