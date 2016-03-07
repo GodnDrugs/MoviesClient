@@ -99,7 +99,7 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         } else {
             cell.bookmarkImage.image = UIImage(named: "bookmarks")
         }
-        
+
         cell.titleLabel.text = self.bookmarkMovie?.title
         var timeGenreYearCountry = self.bookmarkMovie!.runtime!+" - "+self.bookmarkMovie!.genre!
         timeGenreYearCountry += " - "+self.bookmarkMovie!.year!+" - "+self.bookmarkMovie!.country!

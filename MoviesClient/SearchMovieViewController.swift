@@ -185,7 +185,9 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
             }
             
             cellMovie.titleMovieLabel.text = foundMovie.title
+            cellMovie.titleMovieLabel.font = UIFont(name: "OpenSans-Light", size: 12.0)
             cellMovie.movieDescriptionLabel.text = foundMovie.plot
+//            cellMovie.movieDescriptionLabel.font = 
             cellMovie.countryDataLabel.text = foundMovie.country+" - "+foundMovie.year
             cellMovie.imageMovie.af_setImageWithURL(NSURL(string: foundMovie.poster)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
             })
