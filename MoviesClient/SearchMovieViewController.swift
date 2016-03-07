@@ -17,7 +17,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var notFoundMovieFlag: Bool = false
+    var notFoundMovieFlag: Bool = true
     var searchActive: Bool = false
     var imdbIDArray = [AnyObject]()
     var movie: FoundMovie?
@@ -25,6 +25,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     var foundMovieToDetail: FoundMovie?
     var foundMovieArray = [FoundMovie]()
     var imdbIDDeleteArray = [String]()
+    var capCellTitle: String!
     
     var onceToken: dispatch_once_t = 0
     
@@ -33,45 +34,52 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
 
         MovieFactory.sharedInstance.delegate = self
-        self.setNeedsStatusBarAppearanceUpdate()
+//        self.setNeedsStatusBarAppearanceUpdate()
 
-        self.searchBar.resignFirstResponder()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        self.searchBar.resignFirstResponder()
         self.searchBar.delegate = self
         self.searchBar.tintColor = UIColor.blackColor()
         self.searchBar.placeholder = "Search..."
         self.searchBar.showsCancelButton = true
-        self.searchBar.sizeToFit()
-                
+        
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.view.endEditing(true)
+//        self.view.endEditing(true)
         
         tableView.registerNib(SearchViewCell.nibSearchCell(), forCellReuseIdentifier: SearchViewCell.cellSearchReuseIdentifier())
         tableView.registerNib(NotFoundViewCell.nibCell(), forCellReuseIdentifier: NotFoundViewCell.cellReuseIdentifier())
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+
     }
 
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        
         self.setNeedsStatusBarAppearanceUpdate()
-        self.tableView.scrollEnabled = true
         var offSet = CGPoint()
         offSet = self.tableView.contentOffset
         self.tableView.reloadData()
         self.tableView.layoutIfNeeded()
         self.tableView.setContentOffset(offSet, animated: true)
+        self.tableView.scrollEnabled = true
+
         
         dispatch_once(&onceToken) { () -> Void in
             DatabaseManager.sharedInstance.loadPreviousSearchResult({ (previousSearchResultArray) -> Void in
                 if (previousSearchResultArray.count == 0) {
+                    self.capCellTitle = "No result. Do search!"
+                    self.tableView.reloadData()
                     return
+                } else {
+                    self.notFoundMovieFlag = false
+                    self.foundMovieArray = previousSearchResultArray
+                    self.tableView.reloadData()
                 }
-                self.foundMovieArray = previousSearchResultArray
-                self.tableView.reloadData()
+
             })
         }
 
@@ -95,14 +103,15 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
-        if (searchText.characters.count == 1 || searchText.characters.count == 0) {/*this code is sucked into outer space*/} else {
-
-                MovieFactory.sharedInstance.collectorFoundMovie(searchString: searchText) { (foundMovieArray) -> Void in
+        print(searchText)
+        if (searchText.characters.count == 1 || searchText.characters.count == 0) {
+            /*this code is sucked into outer space*/
+        } else {
+                MovieFactory.sharedInstance.collectorFoundMovie(searchString: searchText) { foundMovieArray -> Void in
                     self.foundMovieArray = foundMovieArray
-                    self.notFoundMovieFlag = false
-                    self.tableView.reloadData()
-                    DatabaseManager.sharedInstance.saveSearchResult(resultToSave: foundMovieArray)
-                    
+                        self.notFoundMovieFlag = false
+                        self.tableView.reloadData()
+                        DatabaseManager.sharedInstance.saveSearchResult(resultToSave: foundMovieArray)
             }
         }
         
@@ -149,6 +158,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         var generalCell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier(kCellIdentifier)! as UITableViewCell
         
         if !self.notFoundMovieFlag {
+            self.tableView.scrollEnabled = true
             let cellMovie = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
             
             let foundMovie = self.foundMovieArray[indexPath.row]
@@ -179,17 +189,19 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
             cellMovie.countryDataLabel.text = foundMovie.country+" - "+foundMovie.year
             cellMovie.imageMovie.af_setImageWithURL(NSURL(string: foundMovie.poster)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
             })
-            
-            if (systemVersion < "9.0") {
-                cellMovie.updateConstraintsIfNeeded()
-            }
+//            if (systemVersion < "9.0") {
+//                cellMovie.updateConstraintsIfNeeded()
+//            }
+//            cellMovie.fixConstraints()
             
             generalCell = cellMovie
         } else {
             self.tableView.scrollEnabled = false
             let cellNotFoundMovie = tableView.dequeueReusableCellWithIdentifier(NotFoundViewCell.cellReuseIdentifier()) as! NotFoundViewCell
+            cellNotFoundMovie.notFoundLabel.text = self.capCellTitle
             generalCell = cellNotFoundMovie
         }
+        generalCell.fixConstraints()
         
         return generalCell
     }
@@ -221,6 +233,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     func responseFalseNotification()
     {
         self.notFoundMovieFlag = true
+        self.capCellTitle = "Movie not found!"
         self.tableView.reloadData()
     }
     
@@ -228,8 +241,15 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     {
         return false
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle
+    {
+        return UIStatusBarStyle.LightContent
+    }
 
 }
+
+
 
 
 

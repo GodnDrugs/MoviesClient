@@ -41,7 +41,6 @@ class MovieFactory: NSObject {
         let urlForSearchByTitle = self.createUrlForSearchByTitle(movieTitle: text)
         Alamofire.request(.GET, urlForSearchByTitle, parameters: ["foo": "bar"])
             .responseJSON { response in
-                print("")
                 if let JSON = response.result.value {
                     
                     let dictionaryJSON = JSON as! NSDictionary
@@ -107,14 +106,15 @@ class MovieFactory: NSObject {
     
     func createUrlForSearchByTitle(movieTitle title: String) -> String
     {
-        let stringWithExcessWhitespace = "http://www.omdbapi.com/?s=\(title)"
-        var urlForRequest = removeExcessiveSpaces(stringWithExcessWhitespace: stringWithExcessWhitespace)
+        let titleSpaceOnEnds = title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        let titleSearch = replaceSpacesOnPlus(stringWithExcessWhitespace: titleSpaceOnEnds)
+        var urlForRequest = "http://www.omdbapi.com/?s=\(titleSearch)"
         urlForRequest = urlForRequest.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         
         return urlForRequest
     }
     
-    func removeExcessiveSpaces(stringWithExcessWhitespace string: String) -> String
+    func replaceSpacesOnPlus(stringWithExcessWhitespace string: String) -> String
     {
         let components = string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         let filtered = components.filter({!$0.isEmpty})

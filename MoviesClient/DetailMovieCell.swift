@@ -8,6 +8,12 @@
 
 import UIKit
 
+
+protocol DetailMovieCellDelegate
+{
+    func showDetailPosterScreen() -> Void
+}
+
 class DetailMovieCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -20,7 +26,8 @@ class DetailMovieCell: UITableViewCell {
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var bookmarkImage: UIImageView!
     @IBOutlet weak var cardView: UIView!
-    @IBOutlet weak var headerContainerView: UIView!
+    
+    var delegate: DetailMovieCellDelegate?
     
     override func awakeFromNib()
     {
@@ -29,11 +36,19 @@ class DetailMovieCell: UITableViewCell {
         self.cardView.layer.borderWidth = 2.0
         self.cardView.layer.borderColor = UIColor.grayColor().CGColor
         self.selectionStyle = UITableViewCellSelectionStyle.None
-
+        
+        self.posterImage.layer.cornerRadius = 5.0
+        self.cardView.layer.cornerRadius = 2.0
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("showDetailPoster"))
+        self.posterImage.userInteractionEnabled = true
+        self.posterImage.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    func showDetailPoster() -> Void
+    {
+//        [[self navigationController] popViewControllerAnimated:YES]
+        self.delegate?.showDetailPosterScreen()
     }
 
     class func nibCell() -> UINib

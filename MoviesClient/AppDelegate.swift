@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate/*, SplashScreenViewControl
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
-    
+        UITabBar.appearance().tintColor = UIColor.whiteColor()
 //        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
     
 //        let filter = string.stringByReplacingOccurrencesOfString(" ", withString: "+")

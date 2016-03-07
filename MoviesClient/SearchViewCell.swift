@@ -18,7 +18,6 @@ class SearchViewCell: UITableViewCell {
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var bookmarkImageView: UIImageView!
     
-    
     var isBookmarked: Bool = false
     
     override func awakeFromNib()
@@ -27,6 +26,9 @@ class SearchViewCell: UITableViewCell {
         
         self.cardView.layer.borderWidth = 1.0
         self.cardView.layer.borderColor = UIColor.grayColor().CGColor
+        
+        self.imageMovie.layer.cornerRadius = 5.0
+        self.cardView.layer.cornerRadius = 2.0
     }
     
     class func nibSearchCell() -> UINib

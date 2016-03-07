@@ -16,7 +16,7 @@ import AlamofireImage
 let searchIdentifierVC = "searchVC"
 let bookmarkIdentifierVC = "bookmarkVC"
 
-class DetailMovieViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
+class DetailMovieViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate, DetailMovieCellDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var detailNavigationBar: UINavigationBar!
@@ -34,6 +34,7 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
 
         self.tableView.estimatedRowHeight = 200
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -110,10 +111,11 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         cell.plotLabel.text = "Description: "+(self.bookmarkMovie?.plot)!
         cell.posterImage.af_setImageWithURL(NSURL(string: (self.bookmarkMovie?.poster)!)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
         })
-        
-        if systemVersion < "9.0" {
-            cell.updateConstraintsIfNeeded()
-        }
+        cell.delegate = self
+        cell.fixConstraints()
+//        if systemVersion < "9.0" {
+//            cell.updateConstraintsIfNeeded()
+//        }
 
         return cell
     }
@@ -219,7 +221,11 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
             DatabaseManager.sharedInstance.deleteMoveFromBookmarks(titleMovieForRemove: (self.bookmarkMovie?.title)!)
             self.foundMovie?.isBookmarked = false
             self.foundMovie?.bookmarked = "false"
-            DatabaseManager.sharedInstance.unmark(imdbID: (self.foundMovie?.imdbID)!, isBookmark: "false")
+            if self.foundMovie == nil {
+                DatabaseManager.sharedInstance.unmark(imdbID: (self.bookmarkMovie?.imdbID)!, isBookmark: "false")
+            } else {
+                DatabaseManager.sharedInstance.unmark(imdbID: (self.foundMovie?.imdbID)!, isBookmark: "false")
+            }
             self.bookmarkMovie?.isBookmarked = false
             self.tableView.reloadData()
         }
@@ -231,5 +237,16 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
     {
         return false
     }
+    
+    func showDetailPosterScreen()
+    {
+        self.performSegueWithIdentifier("toDetailPosterVC", sender: self)
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle
+    {
+        return UIStatusBarStyle.LightContent
+    }
+
 
 }/* End Class */

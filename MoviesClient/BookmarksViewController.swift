@@ -65,7 +65,8 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool
+    {
         let searchVC = self.tabBarController?.viewControllers![0] as! SearchMovieViewController
         searchVC.imdbIDDeleteArray = self.imdbIDArray
         return true
@@ -82,6 +83,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         var numberOfRows = 0
+        
         if !self.isBookmarksExist {
             numberOfRows = 1
         } else {
@@ -94,6 +96,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         var heightRow: CGFloat = 0.0
+        
         if !self.isBookmarksExist {
             heightRow = self.tableView.frame.size.height
         } else {
@@ -126,24 +129,24 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
             generalCell = notBookmarksCell
         } else {
             self.tableView.scrollEnabled = true
-            let capCell = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
             let bookmarkMovie = self.bookmarksMovieArray[indexPath.row]
             var timeGenreYearCountry = bookmarkMovie.runtime!+" - "+bookmarkMovie.genre!
             timeGenreYearCountry += " - "+bookmarkMovie.year!+" - "+bookmarkMovie.country!
             
-            capCell.titleMovieLabel.text = bookmarkMovie.title
-            capCell.movieDescriptionLabel.text = bookmarkMovie.plot
-            capCell.countryDataLabel.text = timeGenreYearCountry
-            capCell.imageMovie.af_setImageWithURL(NSURL(string: bookmarkMovie.poster)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
+            cell.titleMovieLabel.text = bookmarkMovie.title
+            cell.movieDescriptionLabel.text = bookmarkMovie.plot
+            cell.countryDataLabel.text = timeGenreYearCountry
+            cell.imageMovie.af_setImageWithURL(NSURL(string: bookmarkMovie.poster)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
             })
+//            if systemVersion < "9.0" {
+//                cell.updateConstraintsIfNeeded()
+//            }
             
-            if systemVersion < "9.0" {
-                capCell.updateConstraintsIfNeeded()
-            }
-            
-            generalCell = capCell
+            generalCell = cell
         }
-
+        generalCell.fixConstraints()
+        
         return generalCell
     }
     
@@ -162,5 +165,11 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     {
         return false
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle
+    {
+        return UIStatusBarStyle.LightContent
+    }
+
 
 }

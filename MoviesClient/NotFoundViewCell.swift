@@ -21,7 +21,7 @@ class NotFoundViewCell: UITableViewCell {
         self.cardView.layer.borderColor = UIColor.grayColor().CGColor
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.userInteractionEnabled = false
-        self.notFoundLabel.text = "Movie not found"
+//        self.notFoundLabel.text = "Movie not found"
     }
     
     class func nibCell() -> UINib
