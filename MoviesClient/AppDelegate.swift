@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate/*, SplashScreenViewControl
     {
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
         UITabBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "OpenSans-Italic", size: 17.0)!, NSForegroundColorAttributeName: UIColor.whiteColor()]
+
 //        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
     
 //        let filter = string.stringByReplacingOccurrencesOfString(" ", withString: "+")

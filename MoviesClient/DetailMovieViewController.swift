@@ -101,8 +101,8 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         }
 
         cell.titleLabel.text = self.bookmarkMovie?.title
-        var timeGenreYearCountry = self.bookmarkMovie!.runtime!+" - "+self.bookmarkMovie!.genre!
-        timeGenreYearCountry += " - "+self.bookmarkMovie!.year!+" - "+self.bookmarkMovie!.country!
+        var timeGenreYearCountry = self.bookmarkMovie!.runtime!+" | "+self.bookmarkMovie!.genre!
+        timeGenreYearCountry += " | "+self.bookmarkMovie!.year!+" | "+self.bookmarkMovie!.country!
         cell.timeGenreYearCountryLabel.text = timeGenreYearCountry
         cell.ratingLabel.text = "Rating: "+(self.bookmarkMovie?.imdbRating)!
         cell.directorLabel.text = "Director: "+(self.bookmarkMovie?.director)!

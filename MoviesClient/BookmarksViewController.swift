@@ -47,6 +47,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewWillAppear(animated)
 
         self.tableView.reloadData()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "OpenSans-Italic", size: 10.0)!, NSForegroundColorAttributeName: UIColor.whiteColor()]
 
         for movie in self.bookmarksMovieArray {
             if !movie.isBookmarked {
@@ -131,8 +132,8 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
             self.tableView.scrollEnabled = true
             let cell = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
             let bookmarkMovie = self.bookmarksMovieArray[indexPath.row]
-            var timeGenreYearCountry = bookmarkMovie.runtime!+" - "+bookmarkMovie.genre!
-            timeGenreYearCountry += " - "+bookmarkMovie.year!+" - "+bookmarkMovie.country!
+            var timeGenreYearCountry = bookmarkMovie.runtime!+" | "+bookmarkMovie.genre!
+            timeGenreYearCountry += " | "+bookmarkMovie.year!+" | "+bookmarkMovie.country!
             
             cell.titleMovieLabel.text = bookmarkMovie.title
             cell.movieDescriptionLabel.text = bookmarkMovie.plot
