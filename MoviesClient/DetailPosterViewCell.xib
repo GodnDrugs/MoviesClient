@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="281" id="KGk-i7-Jjw" customClass="DetailPosterViewCell" customModule="MoviesClient" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="399" height="281"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="399" height="280"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZU1-3z-FR4">
+                        <rect key="frame" x="0.0" y="0.0" width="399" height="280"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mortal" translatesAutoresizingMaskIntoConstraints="NO" id="o5w-Hl-ref">
+                                <rect key="frame" x="0.0" y="0.0" width="399" height="280"/>
+                                <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="o5w-Hl-ref" secondAttribute="bottom" id="159-ge-ESj"/>
+                            <constraint firstItem="o5w-Hl-ref" firstAttribute="top" secondItem="ZU1-3z-FR4" secondAttribute="top" id="9k9-1s-C5H"/>
+                            <constraint firstAttribute="trailing" secondItem="o5w-Hl-ref" secondAttribute="trailing" id="A1m-ub-gHP"/>
+                            <constraint firstItem="o5w-Hl-ref" firstAttribute="centerX" secondItem="ZU1-3z-FR4" secondAttribute="centerX" id="J2B-bd-MWp"/>
+                            <constraint firstItem="o5w-Hl-ref" firstAttribute="centerY" secondItem="ZU1-3z-FR4" secondAttribute="centerY" id="cef-gM-Af4"/>
+                            <constraint firstItem="o5w-Hl-ref" firstAttribute="leading" secondItem="ZU1-3z-FR4" secondAttribute="leading" id="v1l-na-QNs"/>
+                        </constraints>
+                    </scrollView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ZU1-3z-FR4" secondAttribute="trailing" id="A1g-a8-5ig"/>
+                    <constraint firstItem="ZU1-3z-FR4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="RXl-vQ-Mzr"/>
+                    <constraint firstAttribute="bottom" secondItem="ZU1-3z-FR4" secondAttribute="bottom" id="Reh-1A-bgq"/>
+                    <constraint firstItem="ZU1-3z-FR4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="dOc-gE-cjG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="posterImageView" destination="o5w-Hl-ref" id="D8M-VW-Wcf"/>
+                <outlet property="posterScrollView" destination="ZU1-3z-FR4" id="fJt-Df-b5r"/>
+            </connections>
+            <point key="canvasLocation" x="39.5" y="266.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="mortal" width="300" height="450"/>
+    </resources>
+</document>

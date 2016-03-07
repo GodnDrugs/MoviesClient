@@ -8,43 +8,51 @@
 
 import UIKit
 
-class DetailPosterViewController: UIViewController, UIScrollViewDelegate {
+class DetailPosterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet weak var posterScrollView: UIScrollView!
-    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
+    
+    var posterImageURL: String?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        self.posterScrollView.delegate = self
-        self.posterScrollView.minimumZoomScale = 1.0
-        self.posterScrollView.maximumZoomScale = 6.0
-        
-        self.posterImageView.backgroundColor = UIColor.brownColor()
-        
-    }
-
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView?
-    {
-        return self.posterImageView
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.registerNib(DetailPosterViewCell.nibCell(), forCellReuseIdentifier: DetailPosterViewCell.cellReuseIdentifier())
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        return self.tableView.frame.size.height
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        self.tableView.scrollEnabled = false
+        let cell = tableView.dequeueReusableCellWithIdentifier(DetailPosterViewCell.cellReuseIdentifier()) as! DetailPosterViewCell
+        cell.posterImageView.af_setImageWithURL(NSURL(string: self.posterImageURL!)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
+        })
+
+        return cell
+    }
+
     @IBAction func previousScreen(sender: AnyObject)
     {
         self.dismissViewControllerAnimated(true) { () -> Void in
             
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle
+    {
+        return UIStatusBarStyle.LightContent
     }
-    */
 
 }

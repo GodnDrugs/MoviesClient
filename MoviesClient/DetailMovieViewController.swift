@@ -246,6 +246,16 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         self.performSegueWithIdentifier("toDetailPosterVC", sender: self)
     }
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if (segue.identifier == "toDetailPosterVC") {
+            var vc = DetailPosterViewController()
+            vc = segue.destinationViewController as! DetailPosterViewController
+            vc.posterImageURL = self.bookmarkMovie?.poster
+        }
+    }
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle
     {
         return UIStatusBarStyle.LightContent
