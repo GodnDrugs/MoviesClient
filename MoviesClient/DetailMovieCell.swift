@@ -37,7 +37,7 @@ class DetailMovieCell: UITableViewCell {
         self.cardView.layer.borderColor = UIColor.grayColor().CGColor
         self.selectionStyle = UITableViewCellSelectionStyle.None
         
-        self.posterImage.layer.cornerRadius = 5.0
+//        self.posterImage.layer.cornerRadius = 5.0
         self.cardView.layer.cornerRadius = 2.0
         
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("showDetailPoster"))
@@ -47,7 +47,6 @@ class DetailMovieCell: UITableViewCell {
     
     func showDetailPoster() -> Void
     {
-//        [[self navigationController] popViewControllerAnimated:YES]
         self.delegate?.showDetailPosterScreen()
     }
 

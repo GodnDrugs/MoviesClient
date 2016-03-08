@@ -111,6 +111,9 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         cell.plotLabel.text = "Description: "+(self.bookmarkMovie?.plot)!
         cell.posterImage.af_setImageWithURL(NSURL(string: (self.bookmarkMovie?.poster)!)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
         })
+    
+        cell.posterImage.image = scaleImage(cell.posterImage.image!, newSize: CGSizeMake(300.0, 450.0))
+        
         cell.delegate = self
         cell.fixConstraints()
 //        if systemVersion < "9.0" {
@@ -118,6 +121,17 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
 //        }
 
         return cell
+    }
+    
+    func scaleImage(image: UIImage, newSize: CGSize) -> UIImage
+    {
+        UIGraphicsBeginImageContext(newSize)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        image.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
     
     @IBAction func backButton(sender: AnyObject)

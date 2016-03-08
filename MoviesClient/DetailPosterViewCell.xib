@@ -22,6 +22,7 @@
                                 <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                         </subviews>
+                        <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="o5w-Hl-ref" secondAttribute="bottom" id="159-ge-ESj"/>
                             <constraint firstItem="o5w-Hl-ref" firstAttribute="top" secondItem="ZU1-3z-FR4" secondAttribute="top" id="9k9-1s-C5H"/>
@@ -40,10 +41,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="posterImageView" destination="o5w-Hl-ref" id="D8M-VW-Wcf"/>
-                <outlet property="posterScrollView" destination="ZU1-3z-FR4" id="fJt-Df-b5r"/>
+                <outlet property="posterImageView" destination="o5w-Hl-ref" id="54Y-PN-fSa"/>
+                <outlet property="posterScrollView" destination="ZU1-3z-FR4" id="SfE-k8-pzZ"/>
             </connections>
-            <point key="canvasLocation" x="39.5" y="266.5"/>
+            <point key="canvasLocation" x="-250.5" y="49.5"/>
         </tableViewCell>
     </objects>
     <resources>
