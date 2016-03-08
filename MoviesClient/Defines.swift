@@ -13,4 +13,5 @@ let selfIdentifier = "searchVC"
 let systemVersion = UIDevice.currentDevice().systemVersion
 let kCellIdentifier = "GeneralCell"
 let kSegueIdentifire = "toDetailMovieVC"
-
+let searchIdentifierVC = "searchVC"
+let bookmarkIdentifierVC = "bookmarkVC"

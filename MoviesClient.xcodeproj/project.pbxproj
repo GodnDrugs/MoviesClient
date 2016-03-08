@@ -29,7 +29,6 @@
 		64E304F31C83059C0018D434 /* NotFoundViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64E304F11C83059C0018D434 /* NotFoundViewCell.xib */; };
 		64E4D0611C752DDA000220F4 /* CustomActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E4D0601C752DDA000220F4 /* CustomActivityIndicatorView.swift */; };
 		64E64EF31C79FA4F00920151 /* movieclient.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 64E64EF21C79FA4F00920151 /* movieclient.sqlite */; };
-		64E96AE81C8C896F0084C390 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E96AE71C8C896F0084C390 /* SplashScreenViewController.swift */; };
 		64E96AF91C8DBD020084C390 /* Apache License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 64E96AEE1C8DBD020084C390 /* Apache License.txt */; };
 		64E96AFA1C8DBD020084C390 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64E96AEF1C8DBD020084C390 /* OpenSans-Bold.ttf */; };
 		64E96AFB1C8DBD020084C390 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64E96AF01C8DBD020084C390 /* OpenSans-BoldItalic.ttf */; };
@@ -82,7 +81,6 @@
 		64E304F11C83059C0018D434 /* NotFoundViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotFoundViewCell.xib; sourceTree = "<group>"; };
 		64E4D0601C752DDA000220F4 /* CustomActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicatorView.swift; sourceTree = "<group>"; };
 		64E64EF21C79FA4F00920151 /* movieclient.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = movieclient.sqlite; sourceTree = "<group>"; };
-		64E96AE71C8C896F0084C390 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		64E96AEE1C8DBD020084C390 /* Apache License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Apache License.txt"; sourceTree = "<group>"; };
 		64E96AEF1C8DBD020084C390 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		64E96AF01C8DBD020084C390 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -179,7 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				64E1A2F61C64EC07003B47D9 /* App Delegate */,
-				64E433441C6714BC00E7FC68 /* Utility */,
+				64ECACFE1C8F44710086E445 /* Extensions */,
+				64E433441C6714BC00E7FC68 /* Utils */,
 				64E08F5B1C69DB65008ED2DA /* Networking */,
 				64E08F5A1C69DB52008ED2DA /* DB */,
 				64E433431C6710A300E7FC68 /* Models */,
@@ -196,9 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				64E1A2E41C64E81B003B47D9 /* AppDelegate.swift */,
-				64B2493E1C8B7F6500732D4D /* Extensions.swift */,
 				64B2493D1C8AEEFE00732D4D /* MyPlayground.playground */,
-				64FAD4ED1C889249005382DB /* Defines.swift */,
 			);
 			name = "App Delegate";
 			sourceTree = "<group>";
@@ -214,7 +211,6 @@
 				64ED076F1C7CF02E00F50A6B /* DetailMovieViewController.xib */,
 				64B249441C8C4CF200732D4D /* DetailPosterViewController.swift */,
 				64B249451C8C4CF200732D4D /* DetailPosterViewController.xib */,
-				64E96AE71C8C896F0084C390 /* SplashScreenViewController.swift */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -265,12 +261,13 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		64E433441C6714BC00E7FC68 /* Utility */ = {
+		64E433441C6714BC00E7FC68 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				64E4D0601C752DDA000220F4 /* CustomActivityIndicatorView.swift */,
+				64FAD4ED1C889249005382DB /* Defines.swift */,
 			);
-			name = Utility;
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		64E96AEC1C8DBC900084C390 /* Fonts */ = {
@@ -297,6 +294,14 @@
 				64E96AF81C8DBD020084C390 /* OpenSans-SemiboldItalic.ttf */,
 			);
 			path = "open-sans";
+			sourceTree = "<group>";
+		};
+		64ECACFE1C8F44710086E445 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				64B2493E1C8B7F6500732D4D /* Extensions.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -447,7 +452,6 @@
 				64E4D0611C752DDA000220F4 /* CustomActivityIndicatorView.swift in Sources */,
 				64ED07701C7CF02E00F50A6B /* DetailMovieViewController.swift in Sources */,
 				641D93561C68DDDB00FB727B /* DatabaseManager.swift in Sources */,
-				64E96AE81C8C896F0084C390 /* SplashScreenViewController.swift in Sources */,
 				64B249461C8C4CF200732D4D /* DetailPosterViewController.swift in Sources */,
 				64E1A2E71C64E81B003B47D9 /* SearchMovieViewController.swift in Sources */,
 				64ED07741C7CF69400F50A6B /* DetailMovieCell.swift in Sources */,

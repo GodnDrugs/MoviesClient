@@ -37,7 +37,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.tabBarController?.delegate = self
     
-        tableView.registerNib(SearchViewCell.nibSearchCell(), forCellReuseIdentifier: SearchViewCell.cellSearchReuseIdentifier())
+        tableView.registerNib(SearchViewCell.nibCell(), forCellReuseIdentifier: SearchViewCell.cellReuseIdentifier())
         tableView.registerNib(NotBookmarksViewCell.nibCell(), forCellReuseIdentifier: NotBookmarksViewCell.cellReuseIdentifier())
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
     }
@@ -129,7 +129,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
             generalCell = notBookmarksCell
         } else {
             self.tableView.scrollEnabled = true
-            let cell = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellReuseIdentifier()) as! SearchViewCell
             let bookmarkMovie = self.bookmarksMovieArray[indexPath.row]
             var timeGenreYearCountry = bookmarkMovie.runtime!+" | "+bookmarkMovie.genre!
             timeGenreYearCountry += " | "+bookmarkMovie.year!+" | "+bookmarkMovie.country!
@@ -139,9 +139,6 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.countryDataLabel.text = timeGenreYearCountry
             cell.imageMovie.af_setImageWithURL(NSURL(string: bookmarkMovie.poster)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
             })
-//            if systemVersion < "9.0" {
-//                cell.updateConstraintsIfNeeded()
-//            }
             
             generalCell = cell
         }

@@ -33,9 +33,6 @@ class DetailPosterViewController: UIViewController, UITableViewDataSource, UITab
     {
         return 1
     }
-//    (399.0, 280.0) Optional((150.0, 222.5)) Optional(2.0) - url
-//    (399.0, 280.0) Optional((300.0, 450.0)) Optional(1.0) - assets
-
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {

@@ -26,18 +26,16 @@ class SearchViewCell: UITableViewCell {
         
         self.cardView.layer.borderWidth = 1.0
         self.cardView.layer.borderColor = UIColor.grayColor().CGColor
-        
-//        self.imageMovie.layer.cornerRadius = 5.0
         self.cardView.layer.cornerRadius = 2.0
     }
     
-    class func nibSearchCell() -> UINib
+    class func nibCell() -> UINib
     {
         let nib = UINib(nibName: "SearchViewCell", bundle: nil)
         return nib
     }
     
-    class func cellSearchReuseIdentifier() -> String
+    class func cellReuseIdentifier() -> String
     {
         return "cellSearch"
     }

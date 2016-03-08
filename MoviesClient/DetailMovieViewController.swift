@@ -13,8 +13,7 @@ import MessageUI
 import AlamofireImage
 
 
-let searchIdentifierVC = "searchVC"
-let bookmarkIdentifierVC = "bookmarkVC"
+
 
 class DetailMovieViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate, DetailMovieCellDelegate {
 
@@ -116,9 +115,6 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
         
         cell.delegate = self
         cell.fixConstraints()
-//        if systemVersion < "9.0" {
-//            cell.updateConstraintsIfNeeded()
-//        }
 
         return cell
     }
@@ -231,8 +227,6 @@ class DetailMovieViewController: UIViewController, UITableViewDataSource, UITabl
     
     func deleteFromBookmarksAlert() -> UIAlertAction
     {
-
-        
         let removeBookmarkAction = UIAlertAction(title: "Remove from Bookmarks", style: .Default) {
             (alert: UIAlertAction!) -> Void in
             DatabaseManager.sharedInstance.deleteMoveFromBookmarks(titleMovieForRemove: (self.bookmarkMovie?.title)!)

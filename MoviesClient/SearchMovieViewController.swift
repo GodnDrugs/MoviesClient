@@ -49,7 +49,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
 //        self.view.endEditing(true)
         
-        tableView.registerNib(SearchViewCell.nibSearchCell(), forCellReuseIdentifier: SearchViewCell.cellSearchReuseIdentifier())
+        tableView.registerNib(SearchViewCell.nibCell(), forCellReuseIdentifier: SearchViewCell.cellReuseIdentifier())
         tableView.registerNib(NotFoundViewCell.nibCell(), forCellReuseIdentifier: NotFoundViewCell.cellReuseIdentifier())
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
 
@@ -105,7 +105,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     {
         print(searchText)
         if (searchText.characters.count == 1 || searchText.characters.count == 0) {
-            /*this code is sucked into outer space*/
+            /* this code is sucked into outer space */
         } else {
                 MovieFactory.sharedInstance.collectorFoundMovie(searchString: searchText) { foundMovieArray -> Void in
                     self.foundMovieArray = foundMovieArray
@@ -159,7 +159,7 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         
         if !self.notFoundMovieFlag {
             self.tableView.scrollEnabled = true
-            let cellMovie = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellSearchReuseIdentifier()) as! SearchViewCell
+            let cellMovie = tableView.dequeueReusableCellWithIdentifier(SearchViewCell.cellReuseIdentifier()) as! SearchViewCell
             
             let foundMovie = self.foundMovieArray[indexPath.row]
             
@@ -186,15 +186,9 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
             
             cellMovie.titleMovieLabel.text = foundMovie.title
             cellMovie.movieDescriptionLabel.text = foundMovie.plot
-//            cellMovie.movieDescriptionLabel.font = 
             cellMovie.countryDataLabel.text = foundMovie.country+" | "+foundMovie.year
             cellMovie.imageMovie.af_setImageWithURL(NSURL(string: foundMovie.poster)!, placeholderImage: UIImage(named: "scientific15"), completion: { response -> Void in
             })
-//            if (systemVersion < "9.0") {
-//                cellMovie.updateConstraintsIfNeeded()
-//            }
-//            cellMovie.fixConstraints()
-            
             generalCell = cellMovie
         } else {
             self.tableView.scrollEnabled = false
