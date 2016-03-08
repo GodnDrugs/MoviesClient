@@ -27,7 +27,7 @@ class SearchViewCell: UITableViewCell {
         self.cardView.layer.borderWidth = 1.0
         self.cardView.layer.borderColor = UIColor.grayColor().CGColor
         
-        self.imageMovie.layer.cornerRadius = 5.0
+//        self.imageMovie.layer.cornerRadius = 5.0
         self.cardView.layer.cornerRadius = 2.0
     }
     

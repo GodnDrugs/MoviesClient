@@ -21,7 +21,7 @@ class NotBookmarksViewCell: UITableViewCell {
         self.cardView.layer.borderColor = UIColor.grayColor().CGColor
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.userInteractionEnabled = false
-        self.notBookmarksLabel.text = "Sorry, you don't have bookmarks"
+        self.notBookmarksLabel.text = "You do not have bookmarks"
     }
     
     class func nibCell() -> UINib
